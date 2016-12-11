@@ -1,0 +1,22 @@
+{
+  "name": "taskboard-server",
+  "version": "1.0.0",
+  "description": "Taskboard server",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "gulp serve"
+  },
+  "author": "Niclas Pallin",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-nodemon": "^2.2.1",
+    "mocha": "^3.2.0"
+  }
+}
