@@ -1,0 +1,19 @@
+{
+  "name": "taskboard",
+  "version": "1.0.0",
+  "description": "Keep track of your tasks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucalo123/taskboard.git"
+  },
+  "author": "Niclas Pallin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucalo123/taskboard/issues"
+  },
+  "homepage": "https://github.com/lucalo123/taskboard#readme"
+}
