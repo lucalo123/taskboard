@@ -1,1 +1,5 @@
+.editorconfig
+.git
+.idea
 node_modules
+npm-debug.log
