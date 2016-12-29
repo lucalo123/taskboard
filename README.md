@@ -1,3 +1,3 @@
 # Taskboard
 
-### Boilerplate used from react-slingshot
+###### Boilerplate used from react-slingshot
