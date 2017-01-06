@@ -9,6 +9,12 @@ function createTaskSuccess(task) {
     task
   }
 };
+function updateTaskSuccess(task) {
+	return {
+		type: types.UPDATE_TASK_SUCCESS,
+		task
+	}
+};
 function loadTasksSuccess(tasks) {
   return {
     type: types.LOAD_TASKS_SUCCESS,
@@ -18,12 +24,15 @@ function loadTasksSuccess(tasks) {
 
 export function loadTasks() {
   return dispatch => {
-    return api.getTasks().then(data => dispatch(loadTasksSuccess(data.tasks)));
+    return api.getTasks().then(tasks => dispatch(loadTasksSuccess(tasks)));
   };
 }
 
-export function addTask(task) {
-  return dispatch => {
-    return api.saveTask(task).then(task => dispatch(createTaskSuccess(task)));
-  };
+export function saveTask(task) {
+	// Update existing task
+	if(task.id != null) {
+		return dispatch => api.updateTask(task).then(task => dispatch(updateTaskSuccess(task)));
+	}
+	// Create new task
+  return dispatch => api.createTask(task).then(task => dispatch(createTaskSuccess(task)));
 }

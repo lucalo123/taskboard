@@ -7,13 +7,20 @@ import * as actions from '../actions/taskActions';
 class TaskPage extends Component {
   constructor(props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+
   }
+
+  handleChange(event) {
+		console.log(`Checkbox changed value: ${event.target.value}`);
+	}
 
   render() {
     return (
       <div>
         <h2>Tasks Page</h2>
-        <TaskList items={this.props.tasks} />
+        <TaskList items={this.props.tasks} onChange={this.handleChange} />
       </div>
     );
   }

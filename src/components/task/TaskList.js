@@ -1,13 +1,15 @@
 import React from 'react';
 
-const TaskList = ({items}) => {
+import Checkbox from '../common/Checkbox';
+
+const TaskList = ({items, onChange}) => {
   let list = items.map((item, index) => {
-    return <li key={index}>{item}</li>;
+		return <Checkbox key={index} value={index} onChange={onChange} checked={item.completed} label={item.name + ' ' + item.type} />;
   });
   return (
-    <ul>
+    <div>
       {list}
-    </ul>
+    </div>
   );
 };
 

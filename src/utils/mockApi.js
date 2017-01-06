@@ -1,52 +1,40 @@
+import mockData from './mockData';
+
 class MockApi {
   constructor() {
     this.tasks = [];
   }
 
   getTasks() {
-    const self = this;
+    if(this.tasks.length > 0) {
+    	return this.tasks;
+		}
+		this.tasks = mockData.tasks;
     return new Promise((resolve, reject) => {
-      // self.tasks = [
-      //   {
-      //     id: 0,
-      //     name: 'Task #1',
-      //     type: 'Daily chore',
-      //     completed: false
-      //   },
-      //   {
-      //     id: 1,
-      //     name: 'Task #2',
-      //     type: 'House chore',
-      //     completed: true
-      //   }
-      // ];
-      self.tasks = require('./mockData.json');
-      resolve(self.tasks);
+      resolve(mockData.tasks);
     });
   };
 
-  saveTask(task) {
-    const self = this;
-    const prom = new Promise((resolve, reject) => {
-      if(task.id != null) {
-        self.tasks[task.id] = task;
-        resolve(task);
-      } else {
-        const newTask = {
-          id: self.tasks.length,
-          name: task.name,
-          type: task.type,
-          completed: false
-        };
-        self.tasks.push(newTask);
-        resolve(newTask);
-      }
+  createTask(task) {
+		const newTask = {
+			id: this.tasks.length,
+			name: task.name,
+			type: task.type,
+			completed: false
+		};
+		this.tasks.push(newTask);
 
-    });
-
-    return prom;
+    return new Promise((resolve, reject) => {
+			resolve(newTask);
+		});
   }
 
-};
+  updateTask(task) {
+		this.tasks[task.id] = task;
+		return new Promise((resolve, reject) => {
+			resolve(task);
+		});
+	}
+}
 
 export default MockApi;

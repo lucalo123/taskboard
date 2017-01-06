@@ -13,7 +13,7 @@ describe('Task>Actions', () => {
     tasks: []
   };
 
-  it('should create task', () => {
+  it('should create new task', () => {
     const task = {
       name: 'Task #1',
       type: 'Daily chore'
@@ -31,12 +31,42 @@ describe('Task>Actions', () => {
 
     const store = mockStore(initialState);
 
-    return store.dispatch(actions.addTask(task))
+    return store.dispatch(actions.saveTask(task))
       .then(() => {
         assert.deepEqual(store.getActions(), expectedActions);
       });
 
   });
+
+  it('should update task', () => {
+
+		const store = mockStore({
+			tasks: [{
+				id: 0,
+				completed: false,
+				name: 'Swimming',
+				type: 'Exercise'
+			}]
+		});
+
+		const updatedTask = {
+			id: 0,
+			completed: true,
+			name: 'Drowning',
+			type: 'Exercise'
+		};
+
+		const expectedActions = [{
+			type: types.UPDATE_TASK_SUCCESS,
+			task: updatedTask
+		}];
+
+		return store.dispatch(actions.saveTask(updatedTask))
+			.then(() => {
+				assert.deepEqual(store.getActions(), expectedActions);
+			});
+
+	});
 
   it('should load tasks', () => {
     const loadedTasks = [
