@@ -13,7 +13,7 @@ const store = configureStore();
 store.dispatch(loadTasks());
 
 if(process.env.NODE_ENV === 'development') {
-  console.log(store.getState());
+  console.log(store.getState(), 'State');
 }
 
 // Create an enhanced history that syncs navigation events with the store

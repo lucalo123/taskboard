@@ -1,38 +1,41 @@
 import mockData from './mockData';
 
 class MockApi {
-  constructor() {
-    this.tasks = [];
-  }
+	constructor() {
+		this.tasks = [];
+	}
 
-  getTasks() {
-    if(this.tasks.length > 0) {
-    	return this.tasks;
-		}
-		this.tasks = mockData.tasks;
-    return new Promise((resolve, reject) => {
-      resolve(mockData.tasks);
-    });
-  };
+	getTasks() {
+		const self = this;
+		return new Promise((resolve) => {
+			if (self.tasks.length === 0) {
+				self.tasks = mockData.tasks;
+			}
+			resolve(self.tasks);
+		});
+	}
 
-  createTask(task) {
+	createTask(task) {
 		const newTask = {
 			id: this.tasks.length,
 			name: task.name,
 			type: task.type,
 			completed: false
 		};
-		this.tasks.push(newTask);
+		this.tasks = [
+			...this.tasks,
+			Object.assign({}, newTask)
+		];
 
-    return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			resolve(newTask);
 		});
-  }
+	}
 
-  updateTask(task) {
-		this.tasks[task.id] = task;
-		return new Promise((resolve, reject) => {
-			resolve(task);
+	updateTask(task) {
+		this.tasks[task.id] = Object.assign({}, task);
+		return new Promise((resolve) => {
+			resolve(this.tasks[task.id]);
 		});
 	}
 }

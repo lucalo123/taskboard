@@ -15,7 +15,13 @@ export default function loadTasksReducer(state = initialState.tasks, action) {
     case CREATE_TASK_SUCCESS:
       return [
         ...state,
-        Object.assign({}, action.task)
+				{
+					id: action.task.id,
+					completed: action.task.completed,
+					name: action.task.name,
+					type: action.task.type
+				}
+        //Object.assign({}, action.task)
       ];
     default:
       return state;

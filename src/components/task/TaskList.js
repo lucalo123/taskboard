@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import Checkbox from '../common/Checkbox';
 
@@ -11,6 +11,11 @@ const TaskList = ({items, onChange}) => {
       {list}
     </div>
   );
+};
+
+TaskList.propTypes = {
+	items: PropTypes.array.isRequired,
+	onChange: PropTypes.func.isRequired
 };
 
 export default TaskList;

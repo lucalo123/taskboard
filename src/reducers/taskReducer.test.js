@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes';
 import reducer from '././taskReducer';
 import assert from 'assert';
 
-import mockData from '../utils/mockData.js';
+import mockData from '../utils/mockData';
 
 describe('Task>Reducers', () => {
   const act = {
