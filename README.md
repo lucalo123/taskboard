@@ -5,11 +5,11 @@ This application will keep track of various tasks.
 ##### TODOs:
 * [x] Development environment
 * [x] Basic structure
-* [x] Add functionality for creating and updating tasks
+* [x] Add functionality for creating, updating, deleting tasks
 * [ ] Create a list view of created tasks
 	* [x] List tasks
-	* [ ] Add button
-	* [ ] Remove button
+	* [x] Add form
+	* [x] Remove button
 	* [ ] Update button / Content editable
 * [ ] Add functionality for creating and updating widgets
   * [ ] Pull in a library for drag-and-drop functionality

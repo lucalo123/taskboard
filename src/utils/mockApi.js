@@ -15,6 +15,10 @@ class MockApi {
 		});
 	}
 
+	setTasks(tasks) {
+		this.tasks = tasks;
+	}
+
 	createTask(task) {
 		const newTask = {
 			id: this.tasks.length,
@@ -33,9 +37,19 @@ class MockApi {
 	}
 
 	updateTask(task) {
-		this.tasks[task.id] = Object.assign({}, task);
+		const self = this;
 		return new Promise((resolve) => {
-			resolve(this.tasks[task.id]);
+			self.tasks[task.id] = Object.assign({}, task);
+			resolve(self.tasks[task.id]);
+		});
+	}
+
+	deleteTask(id) {
+		const self = this;
+
+		return new Promise(resolve => {
+			self.tasks = self.tasks.slice(id);
+			resolve(true /* Success indicator */);
 		});
 	}
 }

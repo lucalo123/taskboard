@@ -78,4 +78,18 @@ describe('Task>Actions', () => {
 				assert.ok(result[0].tasks.length > 0, 'No tasks returned');
 			});
 	});
+
+	it('should delete task', () => {
+		const expectedActions = [{
+			type: types.DELETE_TASK_SUCCESS,
+			id: 0
+		}];
+		const store = mockStore([]);
+
+		return store.dispatch(actions.deleteTask(0))
+			.then(() => {
+				const result = store.getActions();
+				assert.deepEqual(result, expectedActions);
+			});
+	});
 });

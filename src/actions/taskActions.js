@@ -18,10 +18,17 @@ function updateTaskSuccess(task) {
 }
 
 function loadTasksSuccess(tasks) {
-  return {
-    type: types.LOAD_TASKS_SUCCESS,
-    tasks
-  };
+	return {
+		type: types.LOAD_TASKS_SUCCESS,
+		tasks
+	};
+}
+
+function deleteTasksSuccess(id) {
+	return {
+		type: types.DELETE_TASK_SUCCESS,
+		id
+	};
 }
 
 export function loadTasks() {
@@ -35,4 +42,8 @@ export function saveTask(task) {
 	}
 	// Create new task
   return dispatch => api.createTask(task).then(task => dispatch(createTaskSuccess(task)));
+}
+
+export function deleteTask(id) {
+	return dispatch => api.deleteTask(id).then(success => dispatch(deleteTasksSuccess(id)));
 }

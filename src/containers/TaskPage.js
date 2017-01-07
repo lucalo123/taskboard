@@ -17,10 +17,16 @@ class TaskPage extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleFormChange = this.handleFormChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleDeleteClick = this.handleDeleteClick.bind(this);
 	}
 
 	handleChange(event) {
 		//console.log(`Checkbox changed value: ${event.target.value}`);
+	}
+
+	handleDeleteClick(event) {
+		console.log(`Delete id: ${event.target.value}`);
+		this.props.actions.deleteTask(parseInt(event.target.value));
 	}
 
 	handleSubmit(event) {
@@ -40,7 +46,7 @@ class TaskPage extends Component {
 			<div>
 				<h2>Tasks Page</h2>
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange}/>
-				<TaskList items={this.props.tasks} onChange={this.handleChange}/>
+				<TaskList items={this.props.tasks} onChange={this.handleChange} onDeleteClick={this.handleDeleteClick} />
 			</div>
 		);
 	}

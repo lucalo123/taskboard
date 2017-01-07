@@ -42,4 +42,21 @@ describe('Task>Reducers', () => {
     const result = reducer([], act);
     assert.deepEqual(result, mockData.tasks);
   });
+
+	it('should delete task', () => {
+		const act = {
+			type: types.DELETE_TASK_SUCCESS,
+			id: 0
+		};
+		const initial = [
+			{
+				id: 0,
+				name: 'Drowning',
+				type: 'Exercise',
+				completed: true
+			}
+		];
+		const result = reducer(initial, act);
+		assert.ok(result.length === 0, 'Expected tasks array to be empty');
+	});
 });
