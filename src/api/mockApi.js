@@ -23,7 +23,7 @@ class MockApi {
 		const newTask = {
 			id: this.tasks.length,
 			name: task.name,
-			type: task.type,
+			category: task.category,
 			completed: false
 		};
 		this.tasks = [
@@ -38,9 +38,15 @@ class MockApi {
 
 	updateTask(task) {
 		const self = this;
+		const updatedTask = Object.assign({}, task);
 		return new Promise((resolve) => {
-			self.tasks[task.id] = Object.assign({}, task);
-			resolve(self.tasks[task.id]);
+			self.tasks = self.tasks.map(item => {
+				if(item.id === task.id) {
+					return updatedTask;
+				}
+				return item;
+			});
+			resolve(updatedTask);
 		});
 	}
 

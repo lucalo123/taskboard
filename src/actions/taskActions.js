@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import MockApi from '../utils/mockApi';
+import MockApi from '../api/mockApi';
 
 const api = new MockApi();
 

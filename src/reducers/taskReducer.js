@@ -15,13 +15,7 @@ export default function loadTasksReducer(state = initialState.tasks, action) {
     case CREATE_TASK_SUCCESS:
       return [
         ...state,
-				{
-					id: action.task.id,
-					completed: action.task.completed,
-					name: action.task.name,
-					type: action.task.type
-				}
-        //Object.assign({}, action.task)
+        Object.assign({}, action.task)
       ];
 		case DELETE_TASK_SUCCESS:
 			return state.filter(item => item.id !== action.id);

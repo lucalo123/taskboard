@@ -7,7 +7,7 @@ const TaskForm = ({onSubmit, onChange, form}) => {
 	return (
 		<form onSubmit={onSubmit}>
 			Name <input type="text" value={form.name} name="name" onChange={handleChange} />
-			Type <input type="text" value={form.type} name="type" onChange={handleChange} />
+			Type <input type="text" value={form.category} name="category" onChange={handleChange} />
 			<input type="submit" />
 		</form>
 	);

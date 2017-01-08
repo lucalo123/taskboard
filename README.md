@@ -6,14 +6,15 @@ This application will keep track of various tasks.
 * [x] Development environment
 * [x] Basic structure
 * [x] Add functionality for creating, updating, deleting tasks
-* [ ] Create a list view of created tasks
+* [ ] Task UI
 	* [x] List tasks
-	* [x] Add form
-	* [x] Remove button
-	* [ ] Update button / Content editable
+	* [x] Create task
+	* [x] Remove task
+	* [ ] Update task
 * [ ] Add functionality for creating and updating widgets
   * [ ] Pull in a library for drag-and-drop functionality
 * [ ] Create the dashboard that contains task widgets
+* [ ] Work on the design
 * [ ] Storage solution
 
 ##### Technologies:

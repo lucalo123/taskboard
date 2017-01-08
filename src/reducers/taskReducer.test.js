@@ -2,14 +2,14 @@ import * as types from '../constants/actionTypes';
 import reducer from '././taskReducer';
 import assert from 'assert';
 
-import mockData from '../utils/mockData';
+import mockData from '../api/mockData';
 
 describe('Task>Reducers', () => {
   const act = {
     type: types.CREATE_TASK_SUCCESS,
     task: {
       name: 'New Task',
-      type: 'New'
+			category: 'Exercise'
     }
   };
   it('should create new task', () => {
@@ -21,7 +21,7 @@ describe('Task>Reducers', () => {
 		const updatedTask = {
 			id: 0,
 			name: 'Drowning',
-			type: 'Exercise',
+			category: 'Exercise',
 			completed: true
 		};
 
@@ -52,7 +52,7 @@ describe('Task>Reducers', () => {
 			{
 				id: 0,
 				name: 'Drowning',
-				type: 'Exercise',
+				category: 'Exercise',
 				completed: true
 			}
 		];

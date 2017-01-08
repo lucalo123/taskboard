@@ -1,38 +1,41 @@
-import TaskList from '../components/task/TaskList';
+//import TaskList from '../components/task/TaskList';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/taskActions';
-import TaskForm from '../components/task/TaskForm';
 
+import TaskForm from '../components/task/TaskForm';
+import TaskRow from '../components/task/TaskRow';
 
 class TaskPage extends Component {
-	constructor(props) {
-		super(props);
+	constructor(props, context) {
+		super(props, context);
 
 		this.state = {
-			form: {name: '', type: ''}
+			form: {name: '', category: ''}
 		};
 
-		this.handleChange = this.handleChange.bind(this);
 		this.handleFormChange = this.handleFormChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleDeleteClick = this.handleDeleteClick.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+		this.handleUpdate = this.handleUpdate.bind(this);
 	}
 
-	handleChange(event) {
-		//console.log(`Checkbox changed value: ${event.target.value}`);
-	}
-
-	handleDeleteClick(event) {
-		console.log(`Delete id: ${event.target.value}`);
+	handleDelete(event) {
 		this.props.actions.deleteTask(parseInt(event.target.value));
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
 		this.props.actions.saveTask(this.state.form);
-		this.setState({form: {name: '', type: ''}});
+		this.setState({form: {name: '', category: ''}});
+	}
+
+	handleUpdate(task) {
+		this.props.actions.saveTask(task)
+			.then(task => {
+				console.log(task, 'Task updated');
+			});
 	}
 
 	handleFormChange(name, value) {
@@ -42,16 +45,20 @@ class TaskPage extends Component {
 	}
 
 	render() {
+		const rows = this.props.tasks.map((task, index) => {
+			return <TaskRow key={index} onDelete={this.handleDelete} onUpdate={this.handleUpdate} task={task} />;
+		});
 		return (
 			<div>
 				<h2>Tasks Page</h2>
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange}/>
-				<TaskList items={this.props.tasks} onChange={this.handleChange} onDeleteClick={this.handleDeleteClick} />
+				{rows}
 			</div>
 		);
 	}
 
 }
+// <TaskList tasks={this.props.tasks} onDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
 
 TaskPage.propTypes = {
 	tasks: PropTypes.array.isRequired,

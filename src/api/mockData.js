@@ -2,13 +2,13 @@ export default {
 	tasks: [
 		{
 			name: 'Task #1',
-			type: 'Daily chore',
+			category: 'Exercise',
 			completed: false,
 			id: 0
 		},
 		{
 			name: 'Task #2',
-			type: 'House chore',
+			category: 'Bills',
 			completed: true,
 			id: 1
 		}

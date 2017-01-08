@@ -16,14 +16,14 @@ describe('Task>Actions', () => {
 	it('should create new task', () => {
 		const task = {
 			name: 'Task #1',
-			type: 'Daily chore'
+			category: 'Daily chore'
 		};
 
 		const expectedActions = [{
 			type: types.CREATE_TASK_SUCCESS,
 			task: {
 				name: 'Task #1',
-				type: 'Daily chore',
+				category: 'Daily chore',
 				completed: false,
 				id: 0
 			}
@@ -45,7 +45,7 @@ describe('Task>Actions', () => {
 				id: 0,
 				completed: false,
 				name: 'Swimming',
-				type: 'Exercise'
+				category: 'Exercise'
 			}]
 		});
 
@@ -53,7 +53,7 @@ describe('Task>Actions', () => {
 			id: 0,
 			completed: true,
 			name: 'Drowning',
-			type: 'Exercise'
+			category: 'Exercise'
 		};
 
 		const expectedActions = [{
