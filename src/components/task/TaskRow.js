@@ -18,15 +18,14 @@ class TaskRow extends Component {
 	}
 
 	handleChange(event) {
-		event.stopPropagation();
 		const field = event.target.name;
-		let value = event.target.value;
+		const value = event.target.value;
 		const task = this.state.task;
 		task[field] = value;
 		this.setState({task: task});
 	}
 
-	toggleComplete(event) {
+	toggleComplete() {
 		const task = this.state.task;
 		task.completed = !task.completed;
 		//this.setState({task: task});
@@ -56,7 +55,6 @@ TaskRow.propTypes = {
 	task: PropTypes.object.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onUpdate: PropTypes.func.isRequired
-	//onChange: PropTypes.func.isRequired
 };
 
 export default TaskRow;

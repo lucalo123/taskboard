@@ -1,13 +1,14 @@
 import * as types from '../constants/actionTypes';
-import MockApi from '../api/mockApi';
+import {beginAjaxCall} from './ajaxStatusActions';
 
+import MockApi from '../api/mockApi';
 const api = new MockApi();
 
 function createTaskSuccess(task) {
-  return {
-    type: types.CREATE_TASK_SUCCESS,
-    task
-  };
+	return {
+		type: types.CREATE_TASK_SUCCESS,
+		task
+	};
 }
 
 function updateTaskSuccess(task) {
@@ -32,18 +33,28 @@ function deleteTasksSuccess(id) {
 }
 
 export function loadTasks() {
-  return dispatch => api.getTasks().then(tasks => dispatch(loadTasksSuccess(tasks)));
+	return dispatch => {
+		dispatch(beginAjaxCall());
+		return api.getTasks().then(tasks => dispatch(loadTasksSuccess(tasks)))
+	};
 }
 
 export function saveTask(task) {
-	// Update existing task
-	if(task.id != null) {
-		return dispatch => api.updateTask(task).then(task => dispatch(updateTaskSuccess(task)));
+
+	return dispatch => {
+		dispatch(beginAjaxCall());
+		if (task.id != null) {
+			// Update existing task
+			return api.updateTask(task).then(task => dispatch(updateTaskSuccess(task)));
+		}
+		// Create new task
+		return api.createTask(task).then(task => dispatch(createTaskSuccess(task)));
 	}
-	// Create new task
-  return dispatch => api.createTask(task).then(task => dispatch(createTaskSuccess(task)));
 }
 
 export function deleteTask(id) {
-	return dispatch => api.deleteTask(id).then(success => dispatch(deleteTasksSuccess(id)));
+	return dispatch => {
+		dispatch(beginAjaxCall());
+		return api.deleteTask(id).then(success => dispatch(deleteTasksSuccess(id)));
+	}
 }

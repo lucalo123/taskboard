@@ -19,15 +19,18 @@ describe('Task>Actions', () => {
 			category: 'Daily chore'
 		};
 
-		const expectedActions = [{
-			type: types.CREATE_TASK_SUCCESS,
-			task: {
-				name: 'Task #1',
-				category: 'Daily chore',
-				completed: false,
-				id: 0
+		const expectedActions = [
+			{type: types.BEGIN_AJAX_CALL},
+			{
+				type: types.CREATE_TASK_SUCCESS,
+				task: {
+					name: 'Task #1',
+					category: 'Daily chore',
+					completed: false,
+					id: 0
+				}
 			}
-		}];
+		];
 
 		const store = mockStore(initialState);
 
@@ -41,12 +44,14 @@ describe('Task>Actions', () => {
 	it('should update task', () => {
 
 		const store = mockStore({
-			tasks: [{
-				id: 0,
-				completed: false,
-				name: 'Swimming',
-				category: 'Exercise'
-			}]
+			tasks: [
+				{
+					id: 0,
+					completed: false,
+					name: 'Swimming',
+					category: 'Exercise'
+				}
+			]
 		});
 
 		const updatedTask = {
@@ -56,10 +61,10 @@ describe('Task>Actions', () => {
 			category: 'Exercise'
 		};
 
-		const expectedActions = [{
-			type: types.UPDATE_TASK_SUCCESS,
-			task: updatedTask
-		}];
+		const expectedActions = [
+			{type: types.BEGIN_AJAX_CALL},
+			{type: types.UPDATE_TASK_SUCCESS, task: updatedTask}
+		];
 
 		return store.dispatch(actions.saveTask(updatedTask))
 			.then(() => {
@@ -74,16 +79,16 @@ describe('Task>Actions', () => {
 		return store.dispatch(actions.loadTasks())
 			.then(() => {
 				const result = store.getActions();
-				assert.equal(result[0].type, types.LOAD_TASKS_SUCCESS);
-				assert.ok(result[0].tasks.length > 0, 'No tasks returned');
+				assert.equal(result[1].type, types.LOAD_TASKS_SUCCESS);
+				assert.ok(result[1].tasks.length > 0, 'No tasks returned');
 			});
 	});
 
 	it('should delete task', () => {
-		const expectedActions = [{
-			type: types.DELETE_TASK_SUCCESS,
-			id: 0
-		}];
+		const expectedActions = [
+			{type: types.BEGIN_AJAX_CALL},
+			{type: types.DELETE_TASK_SUCCESS, id: 0}
+		];
 		const store = mockStore([]);
 
 		return store.dispatch(actions.deleteTask(0))

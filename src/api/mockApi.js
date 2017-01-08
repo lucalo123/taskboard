@@ -1,5 +1,7 @@
 import mockData from './mockData';
 
+const DELAY = 500;
+
 class MockApi {
 	constructor() {
 		this.tasks = [];
@@ -7,11 +9,14 @@ class MockApi {
 
 	getTasks() {
 		const self = this;
+
 		return new Promise((resolve) => {
-			if (self.tasks.length === 0) {
-				self.tasks = mockData.tasks;
-			}
-			resolve(self.tasks);
+			setTimeout(() => {
+				if (self.tasks.length === 0) {
+					self.tasks = mockData.tasks;
+				}
+				resolve(self.tasks);
+			}, DELAY)
 		});
 	}
 
@@ -41,7 +46,7 @@ class MockApi {
 		const updatedTask = Object.assign({}, task);
 		return new Promise((resolve) => {
 			self.tasks = self.tasks.map(item => {
-				if(item.id === task.id) {
+				if (item.id === task.id) {
 					return updatedTask;
 				}
 				return item;
