@@ -8,15 +8,13 @@ class MockApi {
 	}
 
 	getTasks() {
-		const self = this;
-
 		return new Promise((resolve) => {
 			setTimeout(() => {
-				if (self.tasks.length === 0) {
-					self.tasks = mockData.tasks;
+				if (this.tasks.length === 0) {
+					this.tasks = mockData.tasks;
 				}
-				resolve(self.tasks);
-			}, DELAY)
+				resolve(this.tasks);
+			}, DELAY);
 		});
 	}
 
@@ -25,27 +23,28 @@ class MockApi {
 	}
 
 	createTask(task) {
-		const newTask = {
-			id: this.tasks.length,
-			name: task.name,
-			category: task.category,
-			completed: false
-		};
-		this.tasks = [
-			...this.tasks,
-			Object.assign({}, newTask)
-		];
-
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
+			if(task.name.length < 3) {
+				reject('Name of task must be at least 3 characters long.');
+			}
+			const newTask = {
+				id: this.tasks.length,
+				name: task.name,
+				category: task.category,
+				completed: false
+			};
+			this.tasks = [
+				...this.tasks,
+				Object.assign({}, newTask)
+			];
 			resolve(newTask);
 		});
 	}
 
 	updateTask(task) {
-		const self = this;
 		const updatedTask = Object.assign({}, task);
 		return new Promise((resolve) => {
-			self.tasks = self.tasks.map(item => {
+			this.tasks = this.tasks.map(item => {
 				if (item.id === task.id) {
 					return updatedTask;
 				}
@@ -56,10 +55,8 @@ class MockApi {
 	}
 
 	deleteTask(id) {
-		const self = this;
-
 		return new Promise(resolve => {
-			self.tasks = self.tasks.slice(id);
+			this.tasks = this.tasks.slice(id);
 			resolve(true /* Success indicator */);
 		});
 	}

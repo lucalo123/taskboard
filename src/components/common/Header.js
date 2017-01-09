@@ -11,7 +11,7 @@ const Header = ({loading}) => {
 			</ul>
 		</nav>
 	);
-}
+};
 
 Header.propTypes = {
 	loading: PropTypes.bool.isRequired

@@ -36,3 +36,11 @@ nav.tb-header {
 		}
 	}
 }
+
+div.task-row-name:hover {
+	border: 1px solid #60b044;
+}
+
+div.task-row-name {
+	border: 1px solid transparent;
+}

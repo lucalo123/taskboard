@@ -20,10 +20,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+	loading: PropTypes.bool.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 	return {
 		loading: state.ajaxCallsInProgress > 0
 	};
