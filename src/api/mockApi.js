@@ -57,7 +57,7 @@ class MockApi {
 	deleteTask(id) {
 		return new Promise(resolve => {
 			this.tasks = this.tasks.slice(id);
-			resolve(true /* Success indicator */);
+			resolve('Task deleted.');
 		});
 	}
 }
