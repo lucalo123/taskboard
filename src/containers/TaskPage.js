@@ -1,4 +1,3 @@
-//import TaskList from '../components/task/TaskList';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -48,17 +47,29 @@ class TaskPage extends Component {
 		const rows = this.props.tasks.map((task, index) => {
 			return <TaskRow key={index} onDelete={this.handleDelete} onUpdate={this.handleUpdate} task={task} />;
 		});
+		// TODO: Find a better alternative than using tables for displaying a list of tasks.
 		return (
 			<div>
 				<h2>Tasks Page</h2>
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange}/>
-				{rows}
+				<table className="table table-condensed">
+					<thead>
+						<tr>
+							<th />
+							<th>Name</th>
+							<th>Category</th>
+							<th />
+						</tr>
+					</thead>
+					<tbody>
+						{rows}
+					</tbody>
+				</table>
 			</div>
 		);
 	}
 
 }
-// <TaskList tasks={this.props.tasks} onDelete={this.handleDelete} onUpdate={this.handleUpdate}/>
 
 TaskPage.propTypes = {
 	tasks: PropTypes.array.isRequired,

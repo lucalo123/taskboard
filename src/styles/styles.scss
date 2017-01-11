@@ -22,21 +22,7 @@ body {
 	font-smoothing: antialiased;
 }
 
-nav.tb-header {
-	background-color: $nav-bg;
-	color: aliceblue;
-	ul {
-		padding: 0;
-		margin: 0;
-		list-style: none;
-		li {
-			display: inline-block;
-			a { display: block; padding: 10px; color: #FFF; text-decoration: none;}
-			a:hover { background-color: $nav-hover; }
-		}
-	}
-}
-
+/* Temporary */
 div.task-row-name:hover {
 	border: 1px solid #60b044;
 }

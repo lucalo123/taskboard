@@ -13,7 +13,9 @@ class App extends Component {
     return (
       <div>
         <Header loading={this.props.loading} />
+				<div className="container" style={{marginTop: '50px'}}>
         {this.props.children}
+				</div>
       </div>
     );
   }

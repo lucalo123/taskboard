@@ -4,5 +4,4 @@
 .idea
 node_modules
 npm-debug.log
-fonts
 src/styles/libs
