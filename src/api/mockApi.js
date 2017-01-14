@@ -1,10 +1,22 @@
 import mockData from './mockData';
 
-const DELAY = 500;
+const DELAY = 20;
 
 class MockApi {
 	constructor() {
 		this.tasks = [];
+		this.categories = [];
+	}
+
+	getCategories() {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				if (this.categories.length === 0) {
+					this.categories = mockData.categories;
+				}
+				resolve(this.categories);
+			}, DELAY);
+		});
 	}
 
 	getTasks() {

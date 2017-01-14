@@ -8,9 +8,19 @@ export default {
 		},
 		{
 			name: 'Task #2',
-			category: 'Bills',
+			category: 'Invoicing',
 			completed: true,
 			id: 1
+		}
+	],
+	categories: [
+		{
+			id: 0,
+			name: 'Exercise'
+		},
+		{
+			id: 1,
+			name: 'Invoicing'
 		}
 	]
 };

@@ -9,9 +9,11 @@ import './styles/styles.scss';
 import './styles/libs/bootstrap/bootstrap.min.css';
 import { syncHistoryWithStore } from 'react-router-redux';
 import {loadTasks} from './actions/taskActions';
+import {loadCategories} from './actions/categoryActions';
 
 const store = configureStore();
 store.dispatch(loadTasks());
+store.dispatch(loadCategories());
 
 if(process.env.NODE_ENV === 'development') {
   console.log(store.getState(), 'State'); // eslint-disable-line no-console
