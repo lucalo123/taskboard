@@ -5,19 +5,28 @@ import assert from 'assert';
 import mockData from '../api/mockData';
 
 describe('Task>Reducers', () => {
-  const act = {
-    type: types.CREATE_TASK_SUCCESS,
-    task: {
-      name: 'New Task',
-			category: 'Exercise'
-    }
-  };
+  
   it('should create new task', () => {
-		const result = reducer([], act);
-		assert.ok(result.length > 0);
+		const act = {
+			type: types.CREATE_TASK_SUCCESS,
+			task: {
+				name: 'New Task',
+				category: 'Exercise'
+			}
+		};
+		const newState = reducer([], act);
+		assert(newState.length === 1, 'Tasks length === 1');
 	});
 
 	it('should update existing task', () => {
+		const initialState = [
+			{
+				id: 0,
+				name: 'Drowning',
+				category: 'Exercise',
+				completed: false
+			}
+		];
 		const updatedTask = {
 			id: 0,
 			name: 'Drowning',
@@ -30,8 +39,8 @@ describe('Task>Reducers', () => {
 			task: updatedTask
 		};
 
-		const result = reducer([ updatedTask ], act);
-		assert.deepEqual(result[0], updatedTask);
+		const newState = reducer(initialState, act);
+		assert.deepEqual(newState[0], updatedTask);
 	});
 
   it('should load tasks', () => {
@@ -39,8 +48,8 @@ describe('Task>Reducers', () => {
       type: types.LOAD_TASKS_SUCCESS,
       tasks: mockData.tasks
     };
-    const result = reducer([], act);
-    assert.deepEqual(result, mockData.tasks);
+    const newState = reducer([], act);
+    assert.deepEqual(newState, mockData.tasks);
   });
 
 	it('should delete task', () => {
@@ -56,7 +65,7 @@ describe('Task>Reducers', () => {
 				completed: true
 			}
 		];
-		const result = reducer(initial, act);
-		assert.ok(result.length === 0, 'Expected tasks array to be empty');
+		const newState = reducer(initial, act);
+		assert.ok(newState.length === 0, 'Expected tasks array to be empty');
 	});
 });

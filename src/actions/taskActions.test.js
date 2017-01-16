@@ -12,6 +12,11 @@ describe('Task>Actions', () => {
 	const initialState = {
 		tasks: []
 	};
+	let store = mockStore(initialState);
+
+	afterEach(() => {
+		store.clearActions();
+	});
 
 	it('should create new task', () => {
 		const task = {
@@ -32,8 +37,6 @@ describe('Task>Actions', () => {
 			}
 		];
 
-		const store = mockStore(initialState);
-
 		return store.dispatch(actions.saveTask(task))
 			.then(() => {
 				assert.deepEqual(store.getActions(), expectedActions);
@@ -43,18 +46,7 @@ describe('Task>Actions', () => {
 
 	it('should update task', () => {
 
-		const store = mockStore({
-			tasks: [
-				{
-					id: 0,
-					completed: false,
-					name: 'Swimming',
-					category: 'Exercise'
-				}
-			]
-		});
-
-		const updatedTask = {
+		const task = {
 			id: 0,
 			completed: true,
 			name: 'Drowning',
@@ -63,10 +55,10 @@ describe('Task>Actions', () => {
 
 		const expectedActions = [
 			{type: types.BEGIN_AJAX_CALL},
-			{type: types.UPDATE_TASK_SUCCESS, task: updatedTask}
+			{type: types.UPDATE_TASK_SUCCESS, task}
 		];
 
-		return store.dispatch(actions.saveTask(updatedTask))
+		return store.dispatch(actions.saveTask(task))
 			.then(() => {
 				assert.deepEqual(store.getActions(), expectedActions);
 			});
@@ -74,13 +66,12 @@ describe('Task>Actions', () => {
 	});
 
 	it('should load tasks', () => {
-		const store = mockStore(initialState);
 
 		return store.dispatch(actions.loadTasks())
 			.then(() => {
 				const result = store.getActions();
 				assert.equal(result[1].type, types.LOAD_TASKS_SUCCESS);
-				assert.ok(result[1].tasks.length > 0, 'No tasks returned');
+				assert(result[1].tasks.length > 0, 'Tasks length > 0');
 			});
 	});
 
@@ -89,7 +80,6 @@ describe('Task>Actions', () => {
 			{type: types.BEGIN_AJAX_CALL},
 			{type: types.DELETE_TASK_SUCCESS, id: 0}
 		];
-		const store = mockStore([]);
 
 		return store.dispatch(actions.deleteTask(0))
 			.then(() => {

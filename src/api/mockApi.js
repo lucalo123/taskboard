@@ -19,6 +19,42 @@ class MockApi {
 		});
 	}
 
+	createCategory(category) {
+		return new Promise(resolve => {
+			const newCat = {
+				id: this.categories.length,
+				name: category.name
+			};
+
+			this.categories = [
+				...this.categories,
+				Object.assign({}, newCat)
+			];
+
+			resolve(newCat);
+		});
+	}
+
+	updateCategory(category) {
+		const updatedCat = Object.assign({}, category);
+		return new Promise(resolve => {
+			this.tasks = this.categories.map(item => {
+				if (item.id === category.id) {
+					return updatedCat;
+				}
+				return item;
+			});
+			resolve(updatedCat);
+		});
+	}
+
+	deleteCategory(id) {
+		return new Promise(resolve => {
+			this.categories = this.categories.slice(id);
+			resolve('Category deleted.');
+		});
+	}
+
 	getTasks() {
 		return new Promise((resolve) => {
 			setTimeout(() => {
