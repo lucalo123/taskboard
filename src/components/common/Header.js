@@ -13,11 +13,10 @@ const Header = ({loading}) => {
 						<span className="icon-bar" />
 						<span className="icon-bar" />
 					</button>
-					<a className="navbar-brand">Taskboard</a>
+					<IndexLink to="/" className="navbar-brand" activeClassName="active">Taskboard</IndexLink>
 				</div>
 					<div className="collapse navbar-collapse">
 						<ul className="nav navbar-nav">
-							<li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
 							<li><Link to="/tasks" activeClassName="active">Tasks</Link></li>
 							<li>{loading && 'Loading...'}</li>
 						</ul>

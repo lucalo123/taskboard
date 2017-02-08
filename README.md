@@ -29,3 +29,4 @@ This application will keep track of various tasks.
 * [react-redux](https://github.com/reactjs/react-redux)
 * Boilerplate code from [react-slingshot](https://github.com/coryhouse/react-slingshot)
 * [bootstrap](http://getbootstrap.com)
+* [react-grid-layout](https://github.com/STRML/react-grid-layout)

@@ -104,7 +104,7 @@ class MockApi {
 
 	deleteTask(id) {
 		return new Promise(resolve => {
-			this.tasks = this.tasks.slice(id);
+			this.tasks = this.tasks.filter(task => task.id !== id);
 			resolve('Task deleted.');
 		});
 	}

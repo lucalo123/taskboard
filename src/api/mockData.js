@@ -3,12 +3,14 @@ export default {
 		{
 			name: 'Task #1',
 			category: 'Exercise',
+			categoryId: 0,
 			completed: false,
 			id: 0
 		},
 		{
 			name: 'Task #2',
 			category: 'Invoicing',
+			categoryId: 1,
 			completed: true,
 			id: 1
 		}

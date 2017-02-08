@@ -12,17 +12,22 @@ class TaskPage extends Component {
 		super(props, context);
 
 		this.state = {
-			form: {name: '', category: ''}
+			form: {name: '', category: ''},
+			activeCategory: -1,
+			visibleTasks: []
 		};
 
 		this.handleFormChange = this.handleFormChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
+		this.handleTabClick = this.handleTabClick.bind(this);
 	}
 
-	handleDelete(event) {
-		this.props.actions.deleteTask(parseInt(event.target.value));
+	handleDelete(id) {
+		return () => {
+			this.props.actions.deleteTask(parseInt(id));
+		};
 	}
 
 	handleSubmit(event) {
@@ -44,9 +49,16 @@ class TaskPage extends Component {
 		this.setState({form: form});
 	}
 
+	handleTabClick(id) {
+		this.setState({activeCategory: id});
+	}
+
 	render() {
 		const rows = this.props.tasks.map((task, index) => {
-			return <TaskRow key={index} onDelete={this.handleDelete} onUpdate={this.handleUpdate} task={task} />;
+			// If active category is All (-1), or task's categoryId matches active category display task.
+			if(this.state.activeCategory === -1 || this.state.activeCategory === task.categoryId) {
+				return <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} />;
+			}
 		});
 		/* TODO:
 		 * 1. Find a better alternative than using tables for displaying a list of tasks.
@@ -55,12 +67,12 @@ class TaskPage extends Component {
 		 * 		- It might get awkward whenever there's a lot of categories, a vertical solution might be better.
 		 * 		- We need to control the active tab state somewhere, if it's gonna be handled inside the Tabs component, we need to change it to a container component.
 		*/
-		const tabNames = this.props.categories.map(tab => tab.name);
+		//const tabList = this.props.categories.map(tab => tab.name);
 		return (
 			<div>
-				<h2>Tasks Page</h2>
-				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} />
-				<Tabs list={tabNames}/>
+				<h2>Tasks</h2>
+				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} categories={this.props.categories} />
+				<Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
 				<table className="table table-condensed">
 					<thead>
 						<tr>
