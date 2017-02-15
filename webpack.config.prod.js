@@ -6,6 +6,7 @@ import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -27,6 +28,7 @@ export default {
     filename: '[name].[chunkhash].js'
   },
   plugins: [
+    new new LodashModuleReplacementPlugin(),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 
