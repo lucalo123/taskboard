@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/taskActions';
+import _clone from 'lodash/clone';
 
 import TaskForm from '../components/task/TaskForm';
 import TaskRow from '../components/task/TaskRow';
@@ -33,8 +34,8 @@ class TaskPage extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		if(this.state.form.name.length <= 3) {
-			let form = Object.assign({}, this.state.form);
-			form.error = 'Name of task must be at least 3 characters long.';
+			let form = _clone(this.state.form);
+			form.error = 'Task name must be at least 3 characters long.';
 			this.setState({form: form});
 		} else {
 			this.props.actions.saveTask(this.state.form);
@@ -63,11 +64,11 @@ class TaskPage extends Component {
 		const rows = this.props.tasks.map((task, index) => {
 			// If active category is All (-1), or task's categoryId matches active category display task.
 			if(this.state.activeCategory === -1 || this.state.activeCategory === task.categoryId) {
-				return <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} />;
+				return <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />;
 			}
 		});
 		/* TODO:
-		 * 1. Find a better alternative than using tables for displaying a list of tasks.
+		 * 1. Find a better alternative than tables for displaying a list of tasks.
 		 * 2. Get categories from the store.
 		 * 3. Figure out if we really want to use tabs for filtering tasks by category.
 		 * 		- It might get awkward whenever there's a lot of categories, a vertical solution might be better.

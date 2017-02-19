@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import _isEqual from 'lodash/isEqual';
 
-class EditableInput extends Component {
+class EditableSelect extends Component {
 
 	constructor(props, context) {
 		super(props, context);
@@ -26,29 +26,37 @@ class EditableInput extends Component {
 		this.setState({ editMode: !this.state.editMode });
 		// Put focus on input if we changed editMode to true.
 		if (!this.state.editMode) {
-			setTimeout(() => { this.textInput.focus(); }, 0);
+			setTimeout(() => { this.selectInput.focus(); }, 0);
 		}
 	}
 
 	render() {
+		const opts = this.props.options.map((option, index) => {
+			return <option key={index} value={option.value}>{option.name}</option>;
+		});
 		return (
-			<div className="form-inline">
+			<div className="form-inline" style={{ width: '390px' }}>
 				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{this.props.value}</span>
-				<input type="text" name={this.props.name} value={this.props.value}
-					ref={input => { this.textInput = input; }}
-					onBlur={this.handleBlur}
-					onChange={this.props.onChange}
-					className={'form-control ' + (!this.state.editMode && 'hidden')} />
+					<select type="text"
+						name={this.props.name} value={this.props.value}
+						onChange={this.props.onChange}
+						onBlur={this.handleBlur}
+						ref={input => {this.selectInput = input;}}
+						className={'form-control ' + (!this.state.editMode && 'hidden')}>
+						{this.props.value == null && <option value="">-- None --</option>}
+						{opts}
+					</select>
 			</div>
 		);
 	}
 }
 
-EditableInput.propTypes = {
+EditableSelect.propTypes = {
 	name: PropTypes.string.isRequired,
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+	options: PropTypes.array,
 	onUpdate: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired
 };
 
-export default EditableInput;
+export default EditableSelect;

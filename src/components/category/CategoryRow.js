@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import _ from 'lodash';
+import _clone from 'lodash/clone';
 
-import EditableInput from '../common/form/EditableInput';
+import EditableText from '../common/form/EditableText';
 import DeleteButton from '../common/DeleteButton';
 
 class CategoryRow extends Component {
@@ -10,16 +10,11 @@ class CategoryRow extends Component {
     super(props, context);
 
     this.state = {
-      category: _.clone(props.category)
+      category: _clone(props.category)
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleSubmit() {
-    // TODO
   }
 
   toggleEdit() {
@@ -43,7 +38,7 @@ class CategoryRow extends Component {
     return (
       <tr>
         <td>
-          <EditableInput name="name" value={name} onUpdate={() => {this.props.onUpdate(this.state.category);}} onChange={this.handleChange} />
+          <EditableText name="name" value={name} onUpdate={() => {this.props.onUpdate(this.state.category);}} onChange={this.handleChange} />
         </td>
         <td>
           <DeleteButton onDelete={() => {this.props.onDelete(id);}} />

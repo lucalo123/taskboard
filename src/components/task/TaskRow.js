@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import _ from 'lodash';
 
-import EditableInput from '../common/form/EditableInput';
+import EditableText from '../common/form/EditableText';
+import EditableSelect from '../common/form/EditableSelect';
 import DeleteButton from '../common/DeleteButton';
 
 class TaskRow extends Component {
@@ -50,7 +51,6 @@ class TaskRow extends Component {
 	}
 
 	render() {
-		let {id, completed, name, category} = this.state.task;
 		/* TODO:
 		 1. DONE: Fix hidden prop doesn't seem to work when using bootstrap classes.
 			- Note: there might be a better solution, research why the hidden property is overriden by bootstrap.
@@ -61,13 +61,17 @@ class TaskRow extends Component {
 		 4. DONE: When canceling update, value should be restored to previous value.
 		 5. Enable update of category. 
 		*/
+		let {id, completed, name, category} = this.state.task;
+		const categoryOptions = this.props.categories.map((cat) => { return {name: cat.name, value: cat.name};});
 		return (
 			<tr>
 				<td><input type="checkbox" name={name} checked={completed} onChange={this.toggleComplete} /></td>
-				<td style={{ width: '390px' }}>
-					<EditableInput name="name" value={name} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} />
+				<td>
+					<EditableText name="name" value={name} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} />
 				</td>
-				<td>{category || 'Uncategorized'}</td>
+				<td>
+					<EditableSelect name="category" value={category} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} options={categoryOptions} />
+				</td>
 				<td>
 					<DeleteButton onDelete={() => {this.props.onDelete(id);}} />
 				</td>
@@ -78,6 +82,7 @@ class TaskRow extends Component {
 
 TaskRow.propTypes = {
 	task: PropTypes.object.isRequired,
+	categories: PropTypes.array.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onUpdate: PropTypes.func.isRequired
 };
