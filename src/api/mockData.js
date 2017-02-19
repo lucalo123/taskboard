@@ -13,6 +13,13 @@ export default {
 			categoryId: 1,
 			completed: true,
 			id: 1
+		},
+		{
+			name: 'Task #3',
+			category: 'Learning',
+			categoryId: 2,
+			completed: true,
+			id: 2
 		}
 	],
 	categories: [
@@ -23,6 +30,10 @@ export default {
 		{
 			id: 1,
 			name: 'Invoicing'
+		},
+		{
+			id: 2,
+			name: 'Learning'
 		}
 	]
 };

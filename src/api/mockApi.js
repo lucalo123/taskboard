@@ -38,7 +38,7 @@ class MockApi {
 	updateCategory(category) {
 		const updatedCat = Object.assign({}, category);
 		return new Promise(resolve => {
-			this.tasks = this.categories.map(item => {
+			this.categories = this.categories.map(item => {
 				if (item.id === category.id) {
 					return updatedCat;
 				}

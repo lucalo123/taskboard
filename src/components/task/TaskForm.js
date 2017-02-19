@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import SelectInput from '../common/SelectInput';
+import SelectInput from '../common/form/SelectInput';
 
 const TaskForm = ({onSubmit, onChange, form, categories}) => {
 	const handleChange = (event) => {
@@ -12,6 +12,9 @@ const TaskForm = ({onSubmit, onChange, form, categories}) => {
 			</div>
 			<SelectInput options={categories} value={form.category} onChange={handleChange} name="category" />
 			<button type="submit" className="btn btn-default">Ok</button>
+			<div className="controls">
+			{form.error && <span className="help-inline text-danger">{form.error}</span>}
+			</div>
 		</form>
 	);
 };
@@ -20,7 +23,8 @@ TaskForm.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
 	form: PropTypes.object.isRequired,
-	categories: PropTypes.array.isRequired
+	categories: PropTypes.array.isRequired,
+	error: PropTypes.string
 };
 
 export default TaskForm;

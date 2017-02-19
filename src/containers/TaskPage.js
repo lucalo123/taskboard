@@ -12,7 +12,7 @@ class TaskPage extends Component {
 		super(props, context);
 
 		this.state = {
-			form: {name: '', category: ''},
+			form: {name: '', category: '', error: null},
 			activeCategory: -1,
 			visibleTasks: []
 		};
@@ -32,14 +32,20 @@ class TaskPage extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		this.props.actions.saveTask(this.state.form);
-		this.setState({form: {name: '', category: ''}});
+		if(this.state.form.name.length <= 3) {
+			let form = Object.assign({}, this.state.form);
+			form.error = 'Name of task must be at least 3 characters long.';
+			this.setState({form: form});
+		} else {
+			this.props.actions.saveTask(this.state.form);
+			this.setState({form: {name: '', category: '', error: ''}});
+		}
 	}
 
 	handleUpdate(task) {
 		this.props.actions.saveTask(task)
 			.then(task => {
-				console.log(task, 'Task updated');
+				console.log('Task updated', task);
 			});
 	}
 
@@ -70,7 +76,7 @@ class TaskPage extends Component {
 		//const tabList = this.props.categories.map(tab => tab.name);
 		return (
 			<div>
-				<h2>Tasks</h2>
+				<h2>Task page</h2>
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} categories={this.props.categories} />
 				<Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
 				<table className="table table-condensed">

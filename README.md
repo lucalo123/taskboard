@@ -15,13 +15,14 @@ This application will keep track of various tasks.
 	* [x] Create task
 	* [x] Remove task
 	* [x] Update task
-	* [ ] Tabs that represent task categories.
-		* [ ] Drag-and-drop tasks into categories.
-		* [ ] Merge categories
-* [ ] Add functionality for creating and updating widgets
-  * [ ] Pull in a library for drag-and-drop functionality
+	* [x] Tabs that represent task categories.
+	* [ ] Editable fields
+	* [ ] Drag-and-drop tasks into different categories.
 * [ ] Create the dashboard that contains task widgets
 * [ ] Work on the design
+	* [ ] Define a layout
+	* [ ] Implement layout
+* [ ] Add functionality for creating and updating widgets
 * [ ] Storage solution
 
 ##### Technologies:

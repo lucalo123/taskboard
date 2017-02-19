@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 
 const Tabs = ({list, activeId, onTabClick}) => {
+  // TODO: Come up with a graceful solution for many tabs. An option would be to have a left and right caret that scrolls through overflowed tabs horizontally.
+  // Copy array and add the 'All' option as the first and default option.
   let items = list.slice();
   items.unshift({id: -1, name: 'All'});
   return (

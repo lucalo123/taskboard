@@ -18,6 +18,7 @@ const Header = ({loading}) => {
 					<div className="collapse navbar-collapse">
 						<ul className="nav navbar-nav">
 							<li><Link to="/tasks" activeClassName="active">Tasks</Link></li>
+							<li><Link to="/categories" activeClassName="active">Categories</Link></li>
 							<li>{loading && 'Loading...'}</li>
 						</ul>
 					</div>

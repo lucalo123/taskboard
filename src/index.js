@@ -7,8 +7,6 @@ import configureStore from './store/configureStore';
 //require('./favicon.ico');
 import './styles/styles.scss';
 import './styles/libs/bootstrap/bootstrap.min.css';
-import '../node_modules/react-grid-layout/css/styles.css';
-import '../node_modules/react-resizable/css/styles.css';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 import {loadTasks} from './actions/taskActions';
