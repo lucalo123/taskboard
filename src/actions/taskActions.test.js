@@ -87,4 +87,16 @@ describe('Task>Actions', () => {
 				assert.deepEqual(result, expectedActions);
 			});
 	});
+
+	it('should dereference categories by id', () => {
+		const expectedActions = [
+			{type: types.EMPTY_CATEGORIES_SUCCESS, id: 0}
+		];
+
+		store.dispatch(actions.emptyCategories(0));
+		const result = store.getActions();
+		assert.deepEqual(result, expectedActions);
+	});
+
+
 });

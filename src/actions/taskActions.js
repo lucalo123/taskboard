@@ -20,6 +20,10 @@ function deleteTasksSuccess(id) {
 	return {type: types.DELETE_TASK_SUCCESS, id};
 }
 
+export function emptyCategories(id) {
+	return dispatch => dispatch({type: types.EMPTY_CATEGORIES_SUCCESS, id});
+}
+
 export function loadTasks() {
 	return dispatch => {
 		dispatch(beginAjaxCall());

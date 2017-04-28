@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/taskActions';
+
 import _clone from 'lodash/clone';
 
 import TaskForm from '../components/task/TaskForm';
@@ -15,7 +16,6 @@ class TaskPage extends Component {
 		this.state = {
 			form: {name: '', category: '', error: null},
 			activeCategory: -1,
-			visibleTasks: []
 		};
 
 		this.handleFormChange = this.handleFormChange.bind(this);
@@ -27,7 +27,7 @@ class TaskPage extends Component {
 
 	handleDelete(id) {
 		return () => {
-			this.props.actions.deleteTask(parseInt(id));
+			this.props.actions.deleteTask(+id);
 		};
 	}
 
@@ -60,26 +60,35 @@ class TaskPage extends Component {
 		this.setState({activeCategory: id});
 	}
 
+	visibleRows() {
+		if(this.state.activeCategory === -1) {
+			return this.props.tasks;
+		}
+		return this.props.tasks.filter(task => task.category_id === this.state.activeCategory);
+	}
+
 	render() {
-		const rows = this.props.tasks.map((task, index) => {
-			// If active category is All (-1), or task's categoryId matches active category display task.
-			if(this.state.activeCategory === -1 || this.state.activeCategory === task.categoryId) {
-				return <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />;
-			}
-		});
+		//console.log(this.props.tasks);
+		const rows = this.visibleRows().map((task, index) => <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />);
 		/* TODO:
 		 * 1. Find a better alternative than tables for displaying a list of tasks.
 		 * 2. Get categories from the store.
 		 * 3. Figure out if we really want to use tabs for filtering tasks by category.
 		 * 		- It might get awkward whenever there's a lot of categories, a vertical solution might be better.
 		 * 		- We need to control the active tab state somewhere, if it's gonna be handled inside the Tabs component, we need to change it to a container component.
+		 * 4. Issue: When filtering by Category, child components (TaskRow) are not updated properly, it always displays first item for some reason.
+		 * 		- Solved: The issue was that TaskRow has its own state and the state never got told to refresh, solved by adding componentWillReceiveProps.
 		*/
 		//const tabList = this.props.categories.map(tab => tab.name);
+
 		return (
 			<div>
 				<h2>Task page</h2>
+
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} categories={this.props.categories} />
+
 				<Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
+				
 				<table className="table table-condensed">
 					<thead>
 						<tr>
@@ -105,18 +114,19 @@ TaskPage.propTypes = {
 	actions: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
 	return {
 		tasks: state.tasks,
-		categories: state.categories
+		categories: state.categories,
+		filter: state.filter
 	};
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
 	return {
-		actions: bindActionCreators(actions, dispatch)
+		actions: bindActionCreators(actions, dispatch),
 	};
-}
+};
 
 export default connect(
 	mapStateToProps,

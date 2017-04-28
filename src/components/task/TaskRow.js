@@ -11,13 +11,19 @@ class TaskRow extends Component {
 		super(props, context);
 
 		this.state = {
-			task: _.clone(props.task)
+			task: Object.assign({}, props.task)
 		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.toggleComplete = this.toggleComplete.bind(this);
 		this.toggleEdit = this.toggleEdit.bind(this);
 		this.handleBlur = this.handleBlur.bind(this);
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if(this.state.task.id !== nextProps.task.id) {
+			this.setState({task: _.clone(nextProps.task)});
+		}
 	}
 
 	handleBlur() {
@@ -60,9 +66,11 @@ class TaskRow extends Component {
 		 3. DONE: Remove conditional text rendering "Completed, Not Completed".
 		 4. DONE: When canceling update, value should be restored to previous value.
 		 5. Enable update of category. 
+		 
 		*/
 		let {id, completed, name, category} = this.state.task;
 		const categoryOptions = this.props.categories.map((cat) => { return {name: cat.name, value: cat.name};});
+		//console.log('RENDERING ROW ' + name);
 		return (
 			<tr>
 				<td><input type="checkbox" name={name} checked={completed} onChange={this.toggleComplete} /></td>

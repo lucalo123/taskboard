@@ -39,15 +39,26 @@ describe('Category>Actions', () => {
 		return store.dispatch(actions.loadCategories())
 			.then(() => {
 				const result = store.getActions();
+				let categories = result[1].categories;
 				assert.equal(result[1].type, types.LOAD_CATEGORIES_SUCCESS);
-				assert.ok(result[1].categories.length > 0, 'No categories returned');
+				assert.ok(categories.length > 0, 'No categories returned');
+				let allIds = [];
+				let byId = categories.reduce((acc, cat) => {
+					acc[cat.name] = cat;
+					allIds.push(cat.name);
+					return acc;
+				}, {});
+				let firstCat = allIds[0];
+				assert.equal(firstCat, 'New category');
+				assert.equal(byId[firstCat].id, 0);
 			});
 	});
 
 	it('should delete category', () => {
 		const expectedActions = [
 			{type: types.BEGIN_AJAX_CALL},
-			{type: types.DELETE_CATEGORY_SUCCESS, id: 0}
+			{type: types.DELETE_CATEGORY_SUCCESS, id: 0},
+			{type: types.EMPTY_CATEGORIES_SUCCESS, id: 0}
 		];
 
 		return store.dispatch(actions.deleteCategory(0))

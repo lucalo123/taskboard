@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import {emptyCategories} from './taskActions';
 
 import MockApi from '../api/mockApi';
 const api = new MockApi();
@@ -51,6 +52,7 @@ export function deleteCategory(id) {
 		dispatch(beginAjaxCall());
 		return api.deleteCategory(id)
 			.then(() => dispatch(deleteCategorySuccess(id)))
+			.then(() => dispatch(emptyCategories(id)))
 			.catch(error => dispatch(ajaxCallError(error)));
 	};
 }

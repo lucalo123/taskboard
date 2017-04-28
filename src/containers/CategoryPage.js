@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from '../actions/categoryActions';
+import * as categoryActions from '../actions/categoryActions';
 import _clone from 'lodash/clone';
 
 import CategoryRow from '../components/category/CategoryRow';
@@ -22,7 +22,7 @@ class CategoryPage extends Component {
 	}
 
 	handleDelete(id) {
-		this.props.actions.deleteCategory(parseInt(id));
+		this.props.actions.deleteCategory(+id);
 	}
 
 	handleUpdate(category) {
@@ -89,7 +89,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		actions: bindActionCreators(actions, dispatch)
+		actions: bindActionCreators(categoryActions, dispatch),
 	};
 }
 

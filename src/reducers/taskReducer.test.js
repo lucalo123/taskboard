@@ -5,6 +5,15 @@ import assert from 'assert';
 import mockData from '../api/mockData';
 
 describe('Task>Reducers', () => {
+
+	const mockTasks = [
+			{
+				id: 0,
+				name: 'Drowning',
+				category: 'Exercise',
+				completed: false
+			}
+		];
   
   it('should create new task', () => {
 		const act = {
@@ -19,14 +28,6 @@ describe('Task>Reducers', () => {
 	});
 
 	it('should update existing task', () => {
-		const initialState = [
-			{
-				id: 0,
-				name: 'Drowning',
-				category: 'Exercise',
-				completed: false
-			}
-		];
 		const updatedTask = {
 			id: 0,
 			name: 'Drowning',
@@ -39,7 +40,7 @@ describe('Task>Reducers', () => {
 			task: updatedTask
 		};
 
-		const newState = reducer(initialState, act);
+		const newState = reducer(mockTasks, act);
 		assert.deepEqual(newState[0], updatedTask);
 	});
 
@@ -67,5 +68,30 @@ describe('Task>Reducers', () => {
 		];
 		const newState = reducer(initial, act);
 		assert.ok(newState.length === 0, 'Expected tasks array to be empty');
+	});
+
+	it('should dereference categories', () => {
+		const act = {
+			type: types.EMPTY_CATEGORIES_SUCCESS,
+			id: 1
+		};
+		const t = [
+			{
+				id: 0,
+				name: 'Drowning',
+				category: 'Exercise',
+				category_id: 1,
+				completed: false
+			}
+		];
+		const updatedTask = {
+			id: 0,
+			name: 'Drowning',
+			category: '- None -',
+			category_id: 0,
+			completed: false
+		};
+		const newState = reducer(t, act);
+		assert.deepEqual(newState[0], updatedTask);
 	});
 });
