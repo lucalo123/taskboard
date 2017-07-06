@@ -18,15 +18,18 @@ This application will keep track of various tasks.
 	* [x] Tabs that represent task categories.
 	* [x] Editable fields
 	* [ ] Drag-and-drop tasks into different categories.
-* [x] Create the dashboard that contains task widgets
+* [ ] Dashboard
+	* [x] Create the dashboard that contains task widgets
+	* [ ] Responsive: e.g. when active tasks < 6 display a panel layout otherwise display a list layout
 * [ ] Tabs
-	* [ ] Clickable tabs that filter tasks
-	* [ ] Tabs display "pills" that counts the amount of containing tasks
+	* [x] Clickable tabs that filter tasks
+	* [ ] Tabs should display "pills" that counts the amount of containing tasks
 * [ ] Work on the design
 	* [ ] Define a layout
+	* [ ] Color scheme
 * [ ] Add functionality for creating and updating widgets
 * [ ] Add search functionality
-* [ ] Storage solution
+* [ ] Add a storage solution
 
 ##### Technologies:
 * [react](https://github.com/facebook/react)
