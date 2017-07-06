@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import AddButton from '../common/AddButton';
 
 const CategoryForm = ({onSubmit, onChange, form}) => {
 	return (
@@ -6,7 +7,7 @@ const CategoryForm = ({onSubmit, onChange, form}) => {
 			<div className="form-group">
 				<input type="text" placeholder="Name" className="form-control" value={form.name} name="name" onChange={event => {onChange(event.target.name, event.target.value);}} />
 			</div>
-			<button type="submit" className="btn btn-default">Ok</button>
+			<AddButton />
 			<div className="controls">
 			{form.error && <span className="help-inline text-danger">{form.error}</span>}
 			</div>

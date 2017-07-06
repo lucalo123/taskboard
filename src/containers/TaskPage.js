@@ -23,6 +23,17 @@ class TaskPage extends Component {
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleTabClick = this.handleTabClick.bind(this);
+		this.getCategoryId = this.getCategoryId.bind(this);
+	}
+
+	getCategoryId(value) {
+		let cats = this.props.categories;
+		for(let i = 0; i < cats.length; i++) {
+			if(cats[i].name === value) {
+				return cats[i].id;
+			}
+		}
+		return -1;
 	}
 
 	handleDelete(id) {
@@ -33,18 +44,21 @@ class TaskPage extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		let form = _clone(this.state.form);
 		if(this.state.form.name.length <= 3) {
-			let form = _clone(this.state.form);
 			form.error = 'Task name must be at least 3 characters long.';
 			this.setState({form: form});
 		} else {
-			this.props.actions.saveTask(this.state.form);
+			form.category_id = this.getCategoryId(this.state.form.category);
+			this.props.actions.saveTask(form);
 			this.setState({form: {name: '', category: '', error: ''}});
 		}
 	}
 
 	handleUpdate(task) {
-		this.props.actions.saveTask(task)
+		let t = _clone(task);
+		t.category_id = this.getCategoryId(task.category);
+		this.props.actions.saveTask(t)
 			.then(task => {
 				console.log('Task updated', task);
 			});
@@ -69,7 +83,8 @@ class TaskPage extends Component {
 
 	render() {
 		//console.log(this.props.tasks);
-		const rows = this.visibleRows().map((task, index) => <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />);
+		const rows = this.visibleRows()
+									.map((task, index) => <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />);
 		/* TODO:
 		 * 1. Find a better alternative than tables for displaying a list of tasks.
 		 * 2. Get categories from the store.
@@ -117,8 +132,7 @@ TaskPage.propTypes = {
 const mapStateToProps = (state) => {
 	return {
 		tasks: state.tasks,
-		categories: state.categories,
-		filter: state.filter
+		categories: state.categories
 	};
 };
 

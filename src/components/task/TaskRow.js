@@ -78,7 +78,7 @@ class TaskRow extends Component {
 					<EditableText name="name" value={name} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} />
 				</td>
 				<td>
-					<EditableSelect name="category" value={category} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} options={categoryOptions} />
+					<EditableSelect name="category" value={category || 'N/A'} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} options={categoryOptions} />
 				</td>
 				<td>
 					<DeleteButton onDelete={() => {this.props.onDelete(id);}} />

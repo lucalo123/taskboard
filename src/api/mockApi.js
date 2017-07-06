@@ -1,6 +1,6 @@
 import mockData from './mockData';
 
-const DELAY = 20;
+const DELAY = 0;
 
 class MockApi {
 	constructor() {
@@ -76,9 +76,10 @@ class MockApi {
 				reject('Name of task must be at least 3 characters long.');
 			}
 			const newTask = {
-				id: this.tasks.length,
+				id: this.tasks.length + 1,
 				name: task.name,
 				category: task.category,
+				category_id: task.category_id,
 				completed: false
 			};
 			this.tasks = [

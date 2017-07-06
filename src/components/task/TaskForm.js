@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import SelectInput from '../common/form/SelectInput';
+import AddButton from '../common/AddButton';
 
 const TaskForm = ({onSubmit, onChange, form, categories}) => {
 	const handleChange = (event) => {
@@ -11,7 +12,7 @@ const TaskForm = ({onSubmit, onChange, form, categories}) => {
 				<input type="text" placeholder="Name" className="form-control" value={form.name} name="name" onChange={handleChange} />
 			</div>
 			<SelectInput options={categories} value={form.category} onChange={handleChange} name="category" />
-			<button type="submit" className="btn btn-default">Ok</button>
+			<AddButton />
 			<div className="controls">
 			{form.error && <span className="help-inline text-danger">{form.error}</span>}
 			</div>

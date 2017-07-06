@@ -7,7 +7,6 @@ const SelectInput = ({options, name, value, onChange, hidden}) => {
       name={name} value={value}
       onChange={onChange}
       className={'form-control ' + (hidden && 'hidden')}>
-      <option value="">-- None --</option>
       {opts}
     </select>
 	);

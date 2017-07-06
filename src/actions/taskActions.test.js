@@ -31,8 +31,9 @@ describe('Task>Actions', () => {
 				task: {
 					name: 'Task #1',
 					category: 'Daily chore',
+					category_id: undefined,
 					completed: false,
-					id: 0
+					id: 1
 				}
 			}
 		];
