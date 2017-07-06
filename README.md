@@ -6,23 +6,26 @@ This application will keep track of various tasks.
 * [x] Development environment
 * [x] Add functionality for creating, updating, deleting tasks
 * [ ] Task category functionality.
-	* [ ] Create category
-	* [ ] Update category
-	* [ ] Remove category
-	* [ ] Relate tasks to different categories
+	* [x] Create category
+	* [ ] Update category (needs to also update name of existing tasks)
+	* [x] Remove category
+	* [x] Relate tasks to different categories
 * [ ] Task UI
 	* [x] List tasks
 	* [x] Create task
 	* [x] Remove task
 	* [x] Update task
 	* [x] Tabs that represent task categories.
-	* [ ] Editable fields
+	* [x] Editable fields
 	* [ ] Drag-and-drop tasks into different categories.
-* [ ] Create the dashboard that contains task widgets
+* [x] Create the dashboard that contains task widgets
+* [ ] Tabs
+	* [ ] Clickable tabs that filter tasks
+	* [ ] Tabs display "pills" that counts the amount of containing tasks
 * [ ] Work on the design
 	* [ ] Define a layout
-	* [ ] Implement layout
 * [ ] Add functionality for creating and updating widgets
+* [ ] Add search functionality
 * [ ] Storage solution
 
 ##### Technologies:
