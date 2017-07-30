@@ -1,5 +1,5 @@
 import {BEGIN_AJAX_CALL, AJAX_CALL_ERROR} from '../constants/actionTypes';
-import initialState from './initialState';
+import initialState from '../store/initialState';
 
 function actionTypeEndsInSuccess(type) {
 	return type.substring(type.length - 8) === '_SUCCESS';

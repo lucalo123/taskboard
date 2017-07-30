@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import {beginAjaxCall, ajaxCallError} from '../ajax/ajaxStatusActions';
 
 import MockApi from '../api/mockApi';
 const api = new MockApi();

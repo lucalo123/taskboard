@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as categoryActions from '../actions/categoryActions';
+import * as categoryActions from './categoryActions';
 import _clone from 'lodash/clone';
 
-import CategoryRow from '../components/category/CategoryRow';
-import CategoryForm from '../components/category/CategoryForm';
+import CategoryRow from './CategoryRow';
+import CategoryForm from './CategoryForm';
 
 class CategoryPage extends Component {
 	constructor(props, context) {

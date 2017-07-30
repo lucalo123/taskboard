@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes';
-import reducer from '././taskReducer';
+import reducer from './taskReducer';
 import assert from 'assert';
 
 import mockData from '../api/mockData';

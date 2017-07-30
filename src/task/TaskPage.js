@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../actions/taskActions';
+import * as actions from './taskActions';
 
 import _clone from 'lodash/clone';
 
-import TaskForm from '../components/task/TaskForm';
-import TaskRow from '../components/task/TaskRow';
-import Tabs from '../components/common/Tabs';
+import TaskForm from './TaskForm';
+import TaskRow from './TaskRow';
+import Tabs from '../common/Tabs';
 
 class TaskPage extends Component {
 	constructor(props, context) {
@@ -93,30 +93,46 @@ class TaskPage extends Component {
 		 * 		- We need to control the active tab state somewhere, if it's gonna be handled inside the Tabs component, we need to change it to a container component.
 		 * 4. Issue: When filtering by Category, child components (TaskRow) are not updated properly, it always displays first item for some reason.
 		 * 		- Solved: The issue was that TaskRow has its own state and the state never got told to refresh, solved by adding componentWillReceiveProps.
+		 * <div className="list-group">
+					<a href="#" className="list-group-item active">Active<span className="badge">10</span></a>
+					<a href="#" className="list-group-item">Other<span className="badge">11</span></a>
+				</div>
 		*/
 		//const tabList = this.props.categories.map(tab => tab.name);
+		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
+		const listGroup = this.props.categories.map(item => (
+				<a href="#" key={item.id} className="list-group-item">{item.name}<span className="badge">10</span></a>
+				)
+			);
 
 		return (
 			<div>
 				<h2>Task page</h2>
 
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} categories={this.props.categories} />
-
-				<Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
-				
-				<table className="table table-condensed">
-					<thead>
-						<tr>
-							<th />
-							<th>Name</th>
-							<th>Category</th>
-							<th />
-						</tr>
-					</thead>
-					<tbody>
-						{rows}
-					</tbody>
-				</table>
+				<hr />
+				<div className="row">
+					<div className="col-xs-3">
+						<div className="list-group" style={{'marginTop': '10px'}}>
+							{listGroup}
+						</div>
+						</div>
+						<div className="col-xs-9">
+							<table className="table table-condensed">
+								<thead>
+									<tr>
+										<th />
+										<th>Name</th>
+										<th>Category</th>
+										<th />
+									</tr>
+								</thead>
+								<tbody>
+									{rows}
+								</tbody>
+							</table>
+						</div>
+				</div>
 			</div>
 		);
 	}

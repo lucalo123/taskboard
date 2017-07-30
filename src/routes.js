@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import HomePage from './components/home/HomePage';
-import TaskPage from './containers/TaskPage';
-import CategoryPage from './containers/CategoryPage';
-import App from './components/App';
-import NotFoundPage from './components/NotFoundPage';
+import HomePage from './home/HomePage';
+import TaskPage from './task/TaskPage';
+import CategoryPage from './category/CategoryPage';
+import App from './App';
+import NotFoundPage from './common/NotFoundPage';
 
 export default (
   <Route path="/" component={App}>

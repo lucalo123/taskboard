@@ -9,8 +9,8 @@ import './styles/styles.scss';
 import './styles/libs/bootstrap/bootstrap.min.css';
 
 import { syncHistoryWithStore } from 'react-router-redux';
-import {loadTasks} from './actions/taskActions';
-import {loadCategories} from './actions/categoryActions';
+import {loadTasks} from './task/taskActions';
+import {loadCategories} from './category/categoryActions';
 
 const store = configureStore();
 store.dispatch(loadTasks());

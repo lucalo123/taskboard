@@ -1,5 +1,5 @@
 import {LOAD_CATEGORIES_SUCCESS, CREATE_CATEGORY_SUCCESS, UPDATE_CATEGORY_SUCCESS, DELETE_CATEGORY_SUCCESS} from '../constants/actionTypes';
-import initialState from './initialState';
+import initialState from '../store/initialState';
 
 export default function loadCategoriesReducer(state = initialState.categories, action) {
   switch(action.type) {
