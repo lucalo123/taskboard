@@ -6,8 +6,8 @@ import * as actions from './taskActions';
 import _clone from 'lodash/clone';
 
 import TaskForm from './TaskForm';
-import TaskRow from './TaskRow';
-import Tabs from '../common/Tabs';
+import TaskTable from './TaskTable';
+//import Tabs from '../common/Tabs';
 
 class TaskPage extends Component {
 	constructor(props, context) {
@@ -22,7 +22,7 @@ class TaskPage extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
-		this.handleTabClick = this.handleTabClick.bind(this);
+		this.handleCategoryClick = this.handleCategoryClick.bind(this);
 		this.getCategoryId = this.getCategoryId.bind(this);
 	}
 
@@ -34,6 +34,17 @@ class TaskPage extends Component {
 			}
 		}
 		return -1;
+	}
+
+	visibleRows() {
+		if(this.state.activeCategory === -1) {
+			return this.props.tasks;
+		}
+		return this.getTasksByCategory(this.state.activeCategory);
+  }
+
+  getTasksByCategory(categoryId) {
+		return this.props.tasks.filter(task => task.category_id === categoryId);
 	}
 
 	handleDelete(id) {
@@ -70,21 +81,29 @@ class TaskPage extends Component {
 		this.setState({form: form});
 	}
 
-	handleTabClick(id) {
+	handleCategoryClick(id) {
+		return () => {
+			this.setActiveCategory(id);
+		};
+	}
+
+	setActiveCategory(id) {
 		this.setState({activeCategory: id});
 	}
 
-	visibleRows() {
-		if(this.state.activeCategory === -1) {
-			return this.props.tasks;
-		}
-		return this.props.tasks.filter(task => task.category_id === this.state.activeCategory);
+	listItem(id, name, count) {
+		return (
+		<span key={id} onClick={this.handleCategoryClick(id)}>
+			<a className={'list-group-item' + (this.state.activeCategory === id ? ' active' : '')}>
+				{name}
+				<span className="badge">{count}</span>
+				</a>
+		</span>);
 	}
 
 	render() {
 		//console.log(this.props.tasks);
-		const rows = this.visibleRows()
-									.map((task, index) => <TaskRow key={index} onDelete={this.handleDelete(task.id)} onUpdate={this.handleUpdate} task={task} categories={this.props.categories} />);
+		
 		/* TODO:
 		 * 1. Find a better alternative than tables for displaying a list of tasks.
 		 * 2. Get categories from the store.
@@ -99,16 +118,17 @@ class TaskPage extends Component {
 				</div>
 		*/
 		//const tabList = this.props.categories.map(tab => tab.name);
-		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleTabClick} />
-		const listGroup = this.props.categories.map(item => (
-				<a href="#" key={item.id} className="list-group-item">{item.name}<span className="badge">10</span></a>
-				)
-			);
-
+		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleCategoryClick} />
+		let cats = [this.listItem(-1, 'All', this.props.tasks.length)];
+		const listGroup = this.props.categories.reduce((index, item) => {
+			cats.push(this.listItem(item.id, item.name, this.getTasksByCategory(item.id).length));
+			return cats;
+		}, cats);
+		
 		return (
 			<div>
 				<h2>Task page</h2>
-
+				<br />
 				<TaskForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} categories={this.props.categories} />
 				<hr />
 				<div className="row">
@@ -118,19 +138,7 @@ class TaskPage extends Component {
 						</div>
 						</div>
 						<div className="col-xs-9">
-							<table className="table table-condensed">
-								<thead>
-									<tr>
-										<th />
-										<th>Name</th>
-										<th>Category</th>
-										<th />
-									</tr>
-								</thead>
-								<tbody>
-									{rows}
-								</tbody>
-							</table>
+							<TaskTable tasks={this.visibleRows()} onDelete={this.handleDelete} onUpdate={this.handleUpdate} categories={this.props.categories} />
 						</div>
 				</div>
 			</div>

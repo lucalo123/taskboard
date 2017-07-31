@@ -34,8 +34,9 @@ class EditableSelect extends Component {
 		const opts = this.props.options.map((option, index) => {
 			return <option key={index} value={option.value}>{option.name}</option>;
 		});
+		// TODO: remove the hard coded "width" style property.
 		return (
-			<div className="form-inline" style={{ width: '390px' }}>
+			<div className="form-inline" style={{ width: '90px' }}>
 				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{this.props.value}</span>
 					<select type="text"
 						name={this.props.name} value={this.props.value}

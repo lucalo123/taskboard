@@ -21,9 +21,9 @@ This application will keep track of various tasks.
 * [ ] Dashboard
 	* [x] Create the dashboard that contains task widgets
 	* [ ] Responsive: e.g. when active tasks < 6 display a panel layout otherwise display a list layout
-* [ ] Tabs
-	* [x] Clickable tabs that filter tasks
-	* [ ] Tabs should display "pills" that counts the amount of containing tasks
+* [x] Filter
+	* [x] Filter tasks by category
+	* x ] Display "pills" that counts the amount of containing tasks
 * [ ] Work on the design
 	* [ ] Define a layout
 	* [ ] Color scheme

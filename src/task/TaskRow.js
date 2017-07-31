@@ -68,7 +68,7 @@ class TaskRow extends Component {
 		 5. Enable update of category. 
 		 
 		*/
-		let {id, completed, name, category} = this.state.task;
+		let {id, completed, name, category, starts_at, ends_at} = this.state.task;
 		const categoryOptions = this.props.categories.map((cat) => { return {name: cat.name, value: cat.name};});
 		//console.log('RENDERING ROW ' + name);
 		return (
@@ -79,6 +79,12 @@ class TaskRow extends Component {
 				</td>
 				<td>
 					<EditableSelect name="category" value={category || 'N/A'} onUpdate={() => {this.props.onUpdate(this.state.task);}} onChange={this.handleChange} options={categoryOptions} />
+				</td>
+				<td>
+					{starts_at}
+				</td>
+				<td>
+					{ends_at}
 				</td>
 				<td>
 					<DeleteButton onDelete={() => {this.props.onDelete(id);}} />

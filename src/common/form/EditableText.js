@@ -31,8 +31,9 @@ class EditableText extends Component {
 	}
 
 	render() {
+		// TODO: remove the hard coded "width" style property.
 		return (
-			<div className="form-inline" style={{ width: '390px' }}>
+			<div className="form-inline" style={{ width: '190px' }}>
 				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{this.props.value}</span>
 				<input type="text" name={this.props.name} value={this.props.value}
 					ref={input => { this.textInput = input; }}

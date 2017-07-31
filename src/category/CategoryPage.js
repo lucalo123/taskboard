@@ -58,7 +58,9 @@ class CategoryPage extends Component {
 		return (
 			<div>
 				<h2>Category page</h2>
+				<br />
 				<CategoryForm form={this.state.form} onSubmit={this.handleSubmit} onChange={this.handleFormChange} />
+				<hr />
 				<table className="table table-condensed">
 					<thead>
 						<tr>

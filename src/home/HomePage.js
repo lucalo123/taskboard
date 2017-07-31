@@ -12,7 +12,8 @@ class HomePage extends Component {
     const activeTasks = this.props.tasks.filter(task => !task.completed);
     return (
       <div>
-        <h3>Active tasks</h3>
+        <h2>Active tasks</h2>
+        <br />
         <div className="row">
           {activeTasks.map(task => <div key={task.id} className="col-md-6"><Panel title={task.name}>{task.name} - {task.category || 'Uncategorized'}</Panel></div>)}
         </div>
