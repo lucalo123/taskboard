@@ -7,7 +7,7 @@ class EditableSelect extends Component {
 		super(props, context);
 
 		this.state = {
-			value: props.value,
+			oldValue: props.value,
 			editMode: false
 		};
 
@@ -16,7 +16,7 @@ class EditableSelect extends Component {
 	}
 
 	handleBlur() {
-		if (!_isEqual(this.props.value, this.state.value)) {
+		if (!_isEqual(this.props.value, this.state.oldValue)) {
 			this.props.onUpdate(this.state.value);
 		}
 		this.setState({ editMode: false });

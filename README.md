@@ -17,16 +17,19 @@ This application will keep track of various tasks.
 	* [x] Update task
 	* [x] Tabs that represent task categories.
 	* [x] Editable fields
+		* [x] Text field
+		* [x] Select field
+		* [x] Date field
 	* [ ] Drag-and-drop tasks into different categories.
 * [ ] Dashboard
 	* [x] Create the dashboard that contains task widgets
 	* [ ] Responsive: e.g. when active tasks < 6 display a panel layout otherwise display a list layout
 * [x] Filter
 	* [x] Filter tasks by category
-	* x ] Display "pills" that counts the amount of containing tasks
+	* [x] Display "pills" that counts the amount of containing tasks
 * [ ] Work on the design
 	* [ ] Define a layout
-	* [ ] Color scheme
+	* [ ] Theme
 * [ ] Add functionality for creating and updating widgets
 * [ ] Add search functionality
 * [ ] Add a storage solution
@@ -37,3 +40,5 @@ This application will keep track of various tasks.
 * Boilerplate code from [react-slingshot](https://github.com/coryhouse/react-slingshot)
 * [bootstrap](http://getbootstrap.com)
 * [lodash](https://lodash.com/)
+* [moment](http://momentjs.com)
+* [react-datetime](https://github.com/YouCanBookMe/react-datetime)

@@ -7,7 +7,7 @@ class EditableText extends Component {
 		super(props, context);
 
 		this.state = {
-			value: props.value,
+			oldValue: props.value,
 			editMode: false
 		};
 
@@ -16,8 +16,8 @@ class EditableText extends Component {
 	}
 
 	handleBlur() {
-		if (!_isEqual(this.props.value, this.state.value)) {
-			this.props.onUpdate(this.state.value);
+		if (!_isEqual(this.props.value, this.state.oldValue)) {
+			this.props.onUpdate(this.props.value);
 		}
 		this.setState({ editMode: false });
 	}

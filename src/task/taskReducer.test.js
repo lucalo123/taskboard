@@ -2,6 +2,8 @@ import * as types from '../constants/actionTypes';
 import reducer from './taskReducer';
 import assert from 'assert';
 
+import moment from 'moment';
+
 import mockData from '../api/mockData';
 
 describe('Task>Reducers', () => {
@@ -93,5 +95,10 @@ describe('Task>Reducers', () => {
 		};
 		const newState = reducer(t, act);
 		assert.deepEqual(newState[0], updatedTask);
+	});
+
+	it.skip('Should test moment', () => {
+		let time = moment().subtract(6, 'days').calendar();
+		console.log(time);
 	});
 });

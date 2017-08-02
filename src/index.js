@@ -7,6 +7,7 @@ import configureStore from './store/configureStore';
 //require('./favicon.ico');
 import './styles/styles.scss';
 import './styles/libs/bootstrap/bootstrap.min.css';
+import './styles/libs/react-datetime/react-datetime.css';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 import {loadTasks} from './task/taskActions';

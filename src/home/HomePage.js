@@ -2,6 +2,8 @@ import React, { PropTypes, Component } from 'react';
 import Panel from '../common/Panel';
 import { connect } from 'react-redux';
 
+import DateInput from '../common/form/DateInput';
+
 class HomePage extends Component {
 
   constructor(props) {

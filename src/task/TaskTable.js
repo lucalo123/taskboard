@@ -1,24 +1,14 @@
-import React, { PropTypes, Component } from 'react';
-import _ from 'lodash';
+import React, { PropTypes } from 'react';
 
 import TaskRow from './TaskRow';
 
-class TaskTable extends Component {
-
-	constructor(props, context) {
-		super(props, context);
-
-    this.state = {};
-    
-  }
-  
-	render() {
-    const rows = this.props.tasks
+const TaskTable = ({tasks, onDelete, onUpdate, categories}) => {
+  const rows = tasks
 									.map(
 										(task, index) =>
-											<TaskRow key={index} onDelete={this.props.onDelete(task.id)} onUpdate={this.props.onUpdate} task={task} categories={this.props.categories} />
-										);
-		return (
+											<TaskRow key={index} onDelete={onDelete(task.id)} onUpdate={onUpdate} task={task} categories={categories} />
+                    );
+  return (
 			<table className="table table-condensed">
         <thead>
           <tr>
@@ -35,8 +25,7 @@ class TaskTable extends Component {
         </tbody>
       </table>
 		);
-	}
-}
+};
 
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,

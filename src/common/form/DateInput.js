@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = (props) => {
+const DateInput = (props) => {
 	return (
-		<input type="text" {...props} />
+		<input type="date" {...props} />
 	);
 };
 
-TextInput.propTypes = {
+DateInput.propTypes = {
 	name: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired,
@@ -14,4 +14,4 @@ TextInput.propTypes = {
 	onClick: PropTypes.func,
 };
 
-export default TextInput;
+export default DateInput;

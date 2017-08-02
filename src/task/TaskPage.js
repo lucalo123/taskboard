@@ -119,11 +119,10 @@ class TaskPage extends Component {
 		*/
 		//const tabList = this.props.categories.map(tab => tab.name);
 		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleCategoryClick} />
-		let cats = [this.listItem(-1, 'All', this.props.tasks.length)];
-		const listGroup = this.props.categories.reduce((index, item) => {
-			cats.push(this.listItem(item.id, item.name, this.getTasksByCategory(item.id).length));
-			return cats;
-		}, cats);
+		let listGroup = [this.listItem(-1, 'All', this.props.tasks.length)];
+		this.props.categories.forEach(item => {
+			listGroup.push(this.listItem(item.id, item.name, this.getTasksByCategory(item.id).length));
+		});
 		
 		return (
 			<div>
@@ -136,10 +135,10 @@ class TaskPage extends Component {
 						<div className="list-group" style={{'marginTop': '10px'}}>
 							{listGroup}
 						</div>
-						</div>
-						<div className="col-xs-9">
-							<TaskTable tasks={this.visibleRows()} onDelete={this.handleDelete} onUpdate={this.handleUpdate} categories={this.props.categories} />
-						</div>
+					</div>
+					<div className="col-xs-9">
+						<TaskTable tasks={this.visibleRows()} onDelete={this.handleDelete} onUpdate={this.handleUpdate} categories={this.props.categories} />
+					</div>
 				</div>
 			</div>
 		);
