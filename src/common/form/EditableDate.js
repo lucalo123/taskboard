@@ -25,7 +25,11 @@ class EditableDate extends Component {
 		if(_.isFunction(this.props.onChange)) {
 			this.props.onChange(date);
 		}
+		// TODO: Fix, it is returning inconsistent results.
+		console.log('eq', date.isSame(this.props.value));
 		if (!date.isSame(this.props.value)) {
+			console.log('date', date);
+			console.log('value', this.props.value);
 			this.props.onUpdate();
 		}
 	}
@@ -39,7 +43,13 @@ class EditableDate extends Component {
 	}
 
 	render() {
+		/* TODO:
+			1. Remove the hard coded "width" style property
+			2. Display date differently depending on how long from now the start date is, e.g. if its in one day display "1 day from now" but if its in like a month display "2017-03-31 09:00:00".
+		*/
 		// TODO: remove the hard coded "width" style property.
+		// moment(this.props.value, 'YYYYMMDD').fromNow()
+		// this.props.value.format('YYYY-MM-DD HH:mm:ss')
 		return (
 			<div className="form-inline" style={{ width: '190px' }}>
 				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{moment(this.props.value, 'YYYYMMDD').fromNow()}</span>

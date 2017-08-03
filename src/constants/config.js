@@ -1,1 +1,1 @@
-export const DB_DATE_FORMAT = 'YYYY-DD-MM HH:mm:ss';
+export const DB_DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
