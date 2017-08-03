@@ -17,7 +17,6 @@ class EditableDate extends Component {
 	}
 
 	handleBlur(date) {
-		//console.log('Date', date.format());
 		if(!date) {
 			return;
 		}
@@ -25,11 +24,7 @@ class EditableDate extends Component {
 		if(_.isFunction(this.props.onChange)) {
 			this.props.onChange(date);
 		}
-		// TODO: Fix, it is returning inconsistent results.
-		console.log('eq', date.isSame(this.props.value));
 		if (!date.isSame(this.props.value)) {
-			console.log('date', date);
-			console.log('value', this.props.value);
 			this.props.onUpdate();
 		}
 	}
