@@ -21,12 +21,12 @@ class EditableDate extends Component {
 		if(!date) {
 			return;
 		}
-		if (!date.isSame(this.props.value)) {
-			this.props.onUpdate();
-		}
 		this.setState({ value: date, editMode: false });
 		if(_.isFunction(this.props.onChange)) {
 			this.props.onChange(date);
+		}
+		if (!date.isSame(this.props.value)) {
+			this.props.onUpdate();
 		}
 	}
 
@@ -45,7 +45,6 @@ class EditableDate extends Component {
 				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{moment(this.props.value, 'YYYYMMDD').fromNow()}</span>
 				<DateTime className={!this.state.editMode && 'hidden'}
 									ref={(input) => {this.dateInput = input;}}
-									closeOnSelect={true}
 									defaultValue={this.props.value}
 									onBlur={date => {this.handleBlur(date);}} />
 			</div>

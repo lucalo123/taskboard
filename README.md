@@ -2,7 +2,7 @@
 
 This application will keep track of various tasks.
 
-##### TODOs:
+#### TODOs:
 * [x] Development environment
 * [x] Add functionality for creating, updating, deleting tasks
 * [ ] Task category functionality.
@@ -34,7 +34,7 @@ This application will keep track of various tasks.
 * [ ] Add search functionality
 * [ ] Add a storage solution
 
-##### Technologies:
+#### Technologies:
 * [react](https://github.com/facebook/react)
 * [react-redux](https://github.com/reactjs/react-redux)
 * Boilerplate code from [react-slingshot](https://github.com/coryhouse/react-slingshot)

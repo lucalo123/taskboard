@@ -51,11 +51,16 @@ class TaskRow extends Component {
 		this.update();
 	}
 
-	/* TODO */
 	setValue(field, value) {
 		const task = this.state.task;
 		task[field] = value;
 		this.setState({task});
+	}
+
+	setDate(field, date/*moment object*/) {
+		let d = date.format('YYYY-MM-DD HH:mm:ss');
+		console.log('SET DATE', d);
+		this.setValue(field, d);
 	}
 
 	toggleEdit() {
@@ -75,8 +80,8 @@ class TaskRow extends Component {
 			*	- An alternative to input and text swap, is to always display an input that is styled in a way that it will look like a regular paragraph.
 		 3. DONE: Remove conditional text rendering "Completed, Not Completed".
 		 4. DONE: When canceling update, value should be restored to previous value.
-		 5. Enable update of category. 
-		 
+		 5. DONE: Enable update of category.
+		 6. DONE: Date fields needs to be parsed before they are sent to db.
 		*/
 		let {id, completed, name, category, starts_at, ends_at} = this.state.task;
 		const categoryOptions = this.props.categories.map((cat) => { return {name: cat.name, value: cat.name};});
@@ -91,10 +96,10 @@ class TaskRow extends Component {
 					<EditableSelect name="category" value={category || 'N/A'} onUpdate={this.update} onChange={this.handleChange} options={categoryOptions} />
 				</td>
 				<td>
-					<EditableDate name="starts_at" value={moment(starts_at)} onUpdate={this.update} onChange={newValue => this.setValue('starts_at', newValue)} />
+					<EditableDate name="starts_at" value={moment(starts_at)} onUpdate={this.update} onChange={newValue => this.setDate('starts_at', newValue)} />
 				</td>
 				<td>
-					<EditableDate name="ends_at" value={moment(ends_at)} onUpdate={this.update} onChange={newValue => this.setValue('ends_at', newValue)} />
+					<EditableDate name="ends_at" value={moment(ends_at)} onUpdate={this.update} onChange={newValue => this.setDate('ends_at', newValue)} />
 				</td>
 				<td>
 					<DeleteButton onDelete={() => {this.props.onDelete(id);}} />

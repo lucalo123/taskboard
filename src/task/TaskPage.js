@@ -121,7 +121,10 @@ class TaskPage extends Component {
 		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleCategoryClick} />
 		let listGroup = [this.listItem(-1, 'All', this.props.tasks.length)];
 		this.props.categories.forEach(item => {
-			listGroup.push(this.listItem(item.id, item.name, this.getTasksByCategory(item.id).length));
+			let count = this.getTasksByCategory(item.id).length;
+			if(count > 0) {
+				listGroup.push(this.listItem(item.id, item.name, count));
+			}
 		});
 		
 		return (
