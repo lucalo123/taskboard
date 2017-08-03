@@ -62,12 +62,10 @@ class TaskPage extends Component {
 		} else {
 			// TEMPORARY:
 			let catId = this.getCategoryId(this.state.form.category);
-			if(catId === -1) {
-				console.log('(Temp Fix) Category id -1');
-				catId = this.props.categories[0].id;
-				form.category = this.props.categories[0].name;
-			}
 			form.category_id = catId;
+			if(catId !== -1) {
+				form.category = this.props.categories[catId].name;
+			}
 			console.log('(Temp Fix) Category id after', form.category_id);
 			this.props.actions.saveTask(form);
 			this.setState({form: {name: '', category: '', error: ''}});

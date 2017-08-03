@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import _isEqual from 'lodash/isEqual';
+import _isEmpty from 'lodash/isEmpty';
 
 class EditableSelect extends Component {
 
@@ -16,7 +17,7 @@ class EditableSelect extends Component {
 	}
 
 	handleBlur() {
-		if (!_isEqual(this.props.value, this.state.oldValue)) {
+		if (!_isEmpty(this.props.value) && !_isEqual(this.props.value, this.state.oldValue)) {
 			this.props.onUpdate(this.state.value);
 		}
 		this.setState({ editMode: false });
@@ -34,17 +35,17 @@ class EditableSelect extends Component {
 		const opts = this.props.options.map((option, index) => {
 			return <option key={index} value={option.value}>{option.name}</option>;
 		});
+		//const showNone = this.props.allowNone && this.props.value == null;
 		// TODO: remove the hard coded "width" style property.
 		return (
 			<div className="form-inline" style={{ width: '90px' }}>
-				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{this.props.value}</span>
+				<span hidden={this.state.editMode} onDoubleClick={this.toggleEdit}>{this.props.value || '-- None --'}</span>
 					<select type="text"
 						name={this.props.name} value={this.props.value}
 						onChange={this.props.onChange}
 						onBlur={this.handleBlur}
 						ref={input => {this.selectInput = input;}}
 						className={'form-control ' + (!this.state.editMode && 'hidden')}>
-						{this.props.value == null && <option value="">-- None --</option>}
 						{opts}
 					</select>
 			</div>
@@ -57,7 +58,8 @@ EditableSelect.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	options: PropTypes.array,
 	onUpdate: PropTypes.func.isRequired,
-	onChange: PropTypes.func.isRequired
+	onChange: PropTypes.func.isRequired,
+	allowNone: PropTypes.bool
 };
 
 export default EditableSelect;

@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import _ from 'lodash';
+import _clone from 'lodash/clone';
 import moment from 'moment';
+import {DB_DATE_FORMAT} from '../constants/config';
 
 import EditableText from '../common/form/EditableText';
 import EditableSelect from '../common/form/EditableSelect';
@@ -25,7 +26,7 @@ class TaskRow extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if(this.state.task.id !== nextProps.task.id) {
-			this.setState({task: _.clone(nextProps.task)});
+			this.setState({task: _clone(nextProps.task)});
 		}
 	}
 
@@ -58,7 +59,7 @@ class TaskRow extends Component {
 	}
 
 	setDate(field, date/*moment object*/) {
-		let d = date.format('YYYY-MM-DD HH:mm:ss');
+		let d = date.format(DB_DATE_FORMAT);
 		console.log('SET DATE', d);
 		this.setValue(field, d);
 	}
@@ -94,7 +95,7 @@ class TaskRow extends Component {
 					<EditableText name="name" value={name} onUpdate={this.update} onChange={this.handleChange} />
 				</td>
 				<td>
-					<EditableSelect name="category" value={category || 'N/A'} onUpdate={this.update} onChange={this.handleChange} options={categoryOptions} />
+					<EditableSelect name="category" value={category} onUpdate={this.update} onChange={this.handleChange} options={categoryOptions} />
 				</td>
 				<td>
 					<EditableDate name="starts_at" value={moment(starts_at)} onUpdate={this.update} onChange={newValue => this.setDate('starts_at', newValue)} />
