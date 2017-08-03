@@ -14,7 +14,7 @@ const SelectInput = ({options, name, value, onChange, hidden}) => {
 
 SelectInput.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.any,
   name: PropTypes.string.isRequired,
   hidden: PropTypes.bool,
   onChange: PropTypes.func.isRequired

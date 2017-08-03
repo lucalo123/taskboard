@@ -73,15 +73,16 @@ class TaskRow extends Component {
 
 	render() {
 		/* TODO:
-		 1. DONE: Fix hidden prop doesn't seem to work when using bootstrap classes.
-			- Note: there might be a better solution, research why the hidden property is overriden by bootstrap.
-		 2. TEMPORARILY FIXED: Inline checkbox, text click should swap text with an input for editing.
-		  - Using a condensed table until I find a better solution.
-			*	- An alternative to input and text swap, is to always display an input that is styled in a way that it will look like a regular paragraph.
-		 3. DONE: Remove conditional text rendering "Completed, Not Completed".
-		 4. DONE: When canceling update, value should be restored to previous value.
-		 5. DONE: Enable update of category.
-		 6. DONE: Date fields needs to be parsed before they are sent to db.
+			1. DONE: Fix hidden prop doesn't seem to work when using bootstrap classes.
+				- Note: there might be a better solution, research why the hidden property is overriden by bootstrap.
+			2. TEMPORARILY FIXED: Inline checkbox, text click should swap text with an input for editing.
+		  	- Using a condensed table until I find a better solution.
+				- An alternative to input and text swap, is to always display an input that is styled in a way that it will look like a regular paragraph.
+			3. DONE: Remove conditional text rendering "Completed, Not Completed".
+			4. DONE: When canceling update, value should be restored to previous value.
+			5. DONE: Enable update of category.
+			6. DONE: Date fields needs to be parsed before they are sent to db.
+			7: Consider: timezones for dates, date might come in as UTC, that requires some translation before display as well as before update.
 		*/
 		let {id, completed, name, category, starts_at, ends_at} = this.state.task;
 		const categoryOptions = this.props.categories.map((cat) => { return {name: cat.name, value: cat.name};});

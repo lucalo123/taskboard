@@ -14,7 +14,7 @@ class TaskPage extends Component {
 		super(props, context);
 
 		this.state = {
-			form: {name: '', category: '', error: null},
+			form: { name: '', category: '', categoryId: -1, error: null },
 			activeCategory: -1,
 		};
 
@@ -60,7 +60,15 @@ class TaskPage extends Component {
 			form.error = 'Task name must be at least 3 characters long.';
 			this.setState({form: form});
 		} else {
-			form.category_id = this.getCategoryId(this.state.form.category);
+			// TEMPORARY:
+			let catId = this.getCategoryId(this.state.form.category);
+			if(catId === -1) {
+				console.log('(Temp Fix) Category id -1');
+				catId = this.props.categories[0].id;
+				form.category = this.props.categories[0].name;
+			}
+			form.category_id = catId;
+			console.log('(Temp Fix) Category id after', form.category_id);
 			this.props.actions.saveTask(form);
 			this.setState({form: {name: '', category: '', error: ''}});
 		}
@@ -102,20 +110,17 @@ class TaskPage extends Component {
 	}
 
 	render() {
-		//console.log(this.props.tasks);
-		
 		/* TODO:
-		 * 1. Find a better alternative than tables for displaying a list of tasks.
-		 * 2. Get categories from the store.
-		 * 3. Figure out if we really want to use tabs for filtering tasks by category.
-		 * 		- It might get awkward whenever there's a lot of categories, a vertical solution might be better.
-		 * 		- We need to control the active tab state somewhere, if it's gonna be handled inside the Tabs component, we need to change it to a container component.
-		 * 4. Issue: When filtering by Category, child components (TaskRow) are not updated properly, it always displays first item for some reason.
-		 * 		- Solved: The issue was that TaskRow has its own state and the state never got told to refresh, solved by adding componentWillReceiveProps.
-		 * <div className="list-group">
-					<a href="#" className="list-group-item active">Active<span className="badge">10</span></a>
-					<a href="#" className="list-group-item">Other<span className="badge">11</span></a>
-				</div>
+		 	1. (Find a better alternative than tables for displaying a list of tasks.)
+		 	2. DONE: Get categories from the store.
+		 	3. SOLVED: Figure out if we really want to use tabs for filtering tasks by category.
+		 		- It might get awkward whenever there's a lot of categories, a vertical solution might be better.
+		 		- We need to control the active tab state somewhere, if it's gonna be handled inside the Tabs component, we need to change it to a container component.
+		 		- Using bootstrap's list group instead
+		 	4. SOLVED: When filtering by Category, child components (TaskRow) are not updated properly, it always displays first item for some reason.
+		 		- Resolution: The issue was that TaskRow has its own state and the state never got told to refresh, solved by adding componentWillReceiveProps.
+			5. Issue: When creating a new task and a category is not explicitly selected, even though first item is clearly selected, category is defined as null.
+		 	6. Issue: When task has a null category you can't select first without selecting other item and saving first.
 		*/
 		//const tabList = this.props.categories.map(tab => tab.name);
 		// <Tabs list={this.props.categories} activeId={this.state.activeCategory} onTabClick={this.handleCategoryClick} />
