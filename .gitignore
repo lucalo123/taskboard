@@ -3,6 +3,11 @@
 .git
 .vscode
 jsconfig.json
+
+# Node
 node_modules
 npm-debug.log
-src/styles/libs
+
+#src/styles/libs
+
+dist

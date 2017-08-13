@@ -28,7 +28,7 @@ export default {
     filename: '[name].[chunkhash].js'
   },
   plugins: [
-    new new LodashModuleReplacementPlugin(),
+    new LodashModuleReplacementPlugin(),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 
