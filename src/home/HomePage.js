@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../widget/widgetActions';
 
-import DateInput from '../common/form/DateInput';
+//import DateInput from '../common/form/DateInput';
 
 class HomePage extends Component {
 
@@ -53,7 +53,7 @@ class HomePage extends Component {
     return false;
   }
 
-  handleDragLeave(event) {
+  handleDragLeave() {
     //console.log('Drag leave');
   }
 
@@ -62,7 +62,6 @@ class HomePage extends Component {
     const to = this.state.dragTargetIndex;
     // Change order if something has changed.
     if(from > -1 && to > -1 && from !== to) {
-      console.log('Change order', 'From: ' + from, 'To: ' + to);
       this.props.actions.changeOrder(from, to);
     }
 
@@ -104,7 +103,8 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  widgets: PropTypes.arrayOf(PropTypes.object).isRequired
+  widgets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
