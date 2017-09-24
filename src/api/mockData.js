@@ -8,5 +8,9 @@ export default {
 		{ id: 0, name: 'Fishing' },
 		{ id: 1, name: 'Learning' },
 		{ id: 2, name: 'Exercise' }
+	],
+	widgets: [
+		{ name: 'Widget 1', description: 'Widget description', order: 0 },
+		{ name: 'Widget 2', description: 'Widget description', order: 1 }
 	]
 };

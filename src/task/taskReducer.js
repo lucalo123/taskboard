@@ -1,4 +1,4 @@
-import {LOAD_TASKS_SUCCESS, CREATE_TASK_SUCCESS, UPDATE_TASK_SUCCESS, DELETE_TASK_SUCCESS, EMPTY_CATEGORIES_SUCCESS} from '../constants/actionTypes';
+import {LOAD_TASKS_SUCCESS, CREATE_TASK_SUCCESS, UPDATE_TASK_SUCCESS, DELETE_TASK_SUCCESS, EMPTY_CATEGORIES_SUCCESS, CHANGE_TASK_ORDER} from '../constants/actionTypes';
 import initialState from '../store/initialState';
 
 export default function loadTasksReducer(state = initialState.tasks, action) {
